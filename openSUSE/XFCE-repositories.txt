@@ -1,0 +1,24 @@
+#  | Ψευδώνυμο                           | Όνομα                       | Ενεργοποιημένο | Ανανέωση
+---+-------------------------------------+-----------------------------+----------------+---------
+ 1 | google-talkplugin                   | google-talkplugin           | Ναι            | Ναι     
+ 2 | http-download.opensuse.org-336467bf | openSUSE:Factory            | Ναι            | Ναι     
+ 3 | http-download.opensuse.org-70c3c97e | home:HunOL                  | Ναι            | Ναι     
+ 4 | http-download.opensuse.org-72a0065b | home:AndnoVember:test       | Όχι            | Όχι     
+ 5 | http-download.opensuse.org-7443c643 | devel:languages:haskell     | Ναι            | Ναι     
+ 6 | http-download.opensuse.org-785d90ea | home:fabio_s                | Ναι            | Ναι     
+ 7 | http-download.opensuse.org-7d23e3ee | home:paolorotolo:numix      | Ναι            | Ναι     
+ 8 | http-download.opensuse.org-9908df8c | home:gottcode               | Ναι            | Ναι     
+ 9 | http-download.opensuse.org-bf88ea44 | X11:xfce                    | Ναι            | Ναι     
+10 | http-download.opensuse.org-c0f60763 | X11:MATE:Next               | Όχι            | Όχι     
+11 | http-download.opensuse.org-f7d58eb1 | home:diamond_gr             | Ναι            | Ναι     
+12 | http-download.opensuse.org-fb24a7e6 | devel:tools:scm             | Ναι            | Ναι     
+13 | http-download.opensuse.org-fcad6726 | X11:Cinnamon:Factory        | Όχι            | Όχι     
+14 | http-download.opensuse.org-ff43ea0d | home:opensuse_zh            | Όχι            | Όχι     
+15 | http-ftp.gwdg.de-c615303d           | Packman Repository          | Ναι            | Ναι     
+16 | http-opensuse-guide.org-b7caf211    | libdvdcss repository        | Ναι            | Ναι     
+17 | openSUSE-20150309-0                 | openSUSE-20150309-0         | Ναι            | Ναι     
+18 | repo-debug                          | openSUSE-Tumbleweed-Debug   | Όχι            | Ναι     
+19 | repo-non-oss                        | openSUSE-Tumbleweed-Non-Oss | Ναι            | Ναι     
+20 | repo-source                         | openSUSE-Tumbleweed-Source  | Όχι            | Ναι     
+21 | repo-update                         | openSUSE-Tumbleweed-Update  | Ναι            | Ναι     
+22 | yandex-browser                      | yandex-browser              | Όχι            | Όχι     
