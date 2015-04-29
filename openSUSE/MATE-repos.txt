@@ -1,0 +1,13 @@
+#  | Ψευδώνυμο                           | Όνομα                       | Ενεργοποιημένο | Ανανέωση | URI                                                                            
+---+-------------------------------------+-----------------------------+----------------+----------+--------------------------------------------------------------------------------
+ 1 | google-talkplugin                   | google-talkplugin           | Ναι            | Ναι      | http://dl.google.com/linux/talkplugin/rpm/stable/i386                          
+ 2 | http-download.opensuse.org-44de385e | home:diamond_gr             | Ναι            | Ναι      | http://download.opensuse.org/repositories/home:/diamond_gr/openSUSE_Tumbleweed/
+ 3 | http-download.opensuse.org-5bde8bcd | home:HunOL                  | Ναι            | Ναι      | http://download.opensuse.org/repositories/home:/HunOL/openSUSE_Factory/        
+ 4 | http-download.opensuse.org-7c73976c | Publishing                  | Ναι            | Ναι      | http://download.opensuse.org/repositories/Publishing/openSUSE_Factory/         
+ 5 | http-ftp.gwdg.de-ced1f51c           | Packman Repository          | Ναι            | Ναι      | http://ftp.gwdg.de/pub/linux/packman/suse/openSUSE_Tumbleweed/                 
+ 6 | http-opensuse-guide.org-1b9dc574    | libdvdcss repository        | Ναι            | Ναι      | http://opensuse-guide.org/repo/openSUSE_Tumbleweed/                            
+ 7 | openSUSE-20150423-0                 | openSUSE-20150423-0         | Ναι            | Ναι      | http://download.opensuse.org/tumbleweed/repo/oss/                              
+ 8 | repo-debug                          | openSUSE-Tumbleweed-Debug   | Όχι            | Ναι      | http://download.opensuse.org/debug/tumbleweed/repo/oss/                        
+ 9 | repo-non-oss                        | openSUSE-Tumbleweed-Non-Oss | Ναι            | Ναι      | http://download.opensuse.org/tumbleweed/repo/non-oss/                          
+10 | repo-source                         | openSUSE-Tumbleweed-Source  | Όχι            | Ναι      | http://download.opensuse.org/source/tumbleweed/repo/oss/                       
+11 | repo-update                         | openSUSE-Tumbleweed-Update  | Ναι            | Ναι      | http://download.opensuse.org/update/tumbleweed/                                
