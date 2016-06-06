@@ -680,4 +680,6 @@ alias repo="sudo reflector --verbose -l 200 -p http --sort rate --save /etc/pacm
 alias team="sudo systemctl start teamviewerd"
 alias net="nmap -sP 192.168.1.1/24"
 alias wifi="sudo modprobe brcmsmac"
-alias mega="megasync --local megatools --remote /Root/Uploads"
+alias mega="megacopy --local megatools --remote /Root/Uploads"
+alias weather="curl wttr.in/Thessaloniki"
+alias youtube="youtube-dl --extract-audio --audio-format mp3"
