@@ -27,7 +27,7 @@
 
 test -s ~/.alias && . ~/.alias || true
 
-#pacman aliases
+#zypper aliases
 alias trim="trimroot && trimhome"
 alias update="sudo zypper up"
 alias upgrade="sudo zypper dup" 
@@ -36,10 +36,12 @@ alias install="sudo zypper in"
 alias trimroot="sudo /usr/sbin/fstrim -v /"
 alias trimhome="sudo /usr/sbin/fstrim -v /home"
 alias team="sudo systemctl start teamviewerd"
-alias mega="megasync --local megatools --remote /Root/Uploads"
+alias mega="megacopy --local megatools --remote /Root/Uploads"
 alias ar="sudo zypper ar -f -n"
 alias net="nmap -sP 192.168.1.1/24"
 alias shutdown="sudo shutdown -h now"
 alias youtube="youtube-dl --extract-audio --audio-format mp3 --username eiosifidis"
 alias weather="wget -qO - wttr.in/Thessaloniki"
 alias kairos="curl http://wttr.in/thessaloniki"
+alias istoriko="cat /var/log/zypp/history"
+alias upbash=". ~/.bashrc"
