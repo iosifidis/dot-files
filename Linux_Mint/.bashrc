@@ -126,8 +126,8 @@ fi
 
 #alias
 alias up="update && upgrade"
-alias update="sudo apt-get update"
-alias upgrade="sudo apt-get upgrade"
+alias update="sudo apt update"
+alias upgrade="sudo apt upgrade -y"
 alias search="sudo apt-cache search"
 alias install="sudo apt-get install"
 alias mega="megasync --local megatools --remote /Root/Uploads"
@@ -136,9 +136,12 @@ alias net="nmap -sP 192.168.1.1/24"
 alias youtube="youtube-dl --extract-audio --audio-format mp3 --username eiosifidis"
 alias weather="wget -qO - wttr.in/Thessaloniki"
 alias kairos="curl http://wttr.in/Athens"
+alias bat="acpi"
 alias upbash=". ~/.bashrc"
 alias team="sudo systemctl start teamviewerd"
-
+alias trim="sudo fstrim --all -v"
+#alias trimauto="sudo systemctl enable fstrim.timer && sudo systemctl start fstrim.timer"
+alias operaup="wget -qO - https://deb.opera.com/archive.key | sudo apt-key add -"
 
 # print the git branch name if in a git project
 parse_git_branch() {
