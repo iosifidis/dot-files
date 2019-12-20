@@ -1,0 +1,13 @@
+Repository priorities are without effect. All enabled repositories share the same priority.
+
+# | Ψευδώνυμο                        | Όνομα                      | Ενεργοποιημένο | Έλεγχος GPG | Ανανέωση
+--+----------------------------------+----------------------------+----------------+-------------+---------
+1 | download.opensuse.org-non-oss    | Main Repository (NON-OSS)  | Ναι            | (r ) Ναι    | Ναι     
+2 | download.opensuse.org-oss        | Main Repository (OSS)      | Ναι            | (r ) Ναι    | Ναι     
+3 | download.opensuse.org-tumbleweed | Main Update Repository     | Ναι            | (r ) Ναι    | Ναι     
+4 | google-chrome                    | google-chrome              | Ναι            | (r ) Ναι    | Ναι     
+5 | http-ftp.gwdg.de-f17477de        | Packman Repository         | Ναι            | (r ) Ναι    | Ναι     
+6 | http-opensuse-guide.org-f0a5dfd8 | libdvdcss repository       | Ναι            | (r ) Ναι    | Ναι     
+7 | openSUSE-20191104-0              | openSUSE-20191104-0        | Ναι            | (r ) Ναι    | Ναι     
+8 | repo-debug                       | openSUSE-Tumbleweed-Debug  | Όχι            | ----        | ----    
+9 | repo-source                      | openSUSE-Tumbleweed-Source | Όχι            | ----        | ----    
