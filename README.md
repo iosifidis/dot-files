@@ -2,9 +2,9 @@
 My Dot Files. System settings
 
 #Backup of installed
-# http://www.nixtutor.com/linux/keep-a-backup-of-installed-packages/
+http://www.nixtutor.com/linux/keep-a-backup-of-installed-packages/
 
-Debian / Ubuntu
+**Debian / Ubuntu**
 Backup
 
 dpkg --get-selections > installed-software.log
@@ -12,9 +12,10 @@ dpkg --get-selections > installed-software.log
 Restore
 
 dpkg --set-selections < installed-software.log
+
 apt-get dselect-upgrade
 
-Arch Linux
+**Arch Linux**
 Backup
 
 pacman -Qqe | grep -v "$(pacman -Qmq)" > pkglist
@@ -23,7 +24,7 @@ Restore
 
 pacman -S $(cat pkglist)
 
-openSUSE
+**openSUSE
 Backup
 
 rpm -qa > installed-software.bak
