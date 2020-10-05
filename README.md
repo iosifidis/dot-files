@@ -1,8 +1,8 @@
 # dot-files
 My Dot Files. System settings
 
-#Backup of installed
-http://www.nixtutor.com/linux/keep-a-backup-of-installed-packages/
+# Backup of installed
+[http://www.nixtutor.com/linux/keep-a-backup-of-installed-packages/](http://www.nixtutor.com/linux/keep-a-backup-of-installed-packages/)
 
 
 # Debian / Ubuntu
@@ -18,7 +18,7 @@ dpkg --set-selections < installed-software.log
 apt-get dselect-upgrade
 
 
-#Arch Linux
+# Arch Linux
 
 **Backup**
 
