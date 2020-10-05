@@ -4,32 +4,38 @@ My Dot Files. System settings
 #Backup of installed
 http://www.nixtutor.com/linux/keep-a-backup-of-installed-packages/
 
-**Debian / Ubuntu**
-Backup
+
+# Debian / Ubuntu
+
+**Backup**
 
 dpkg --get-selections > installed-software.log
 
-Restore
+**Restore**
 
 dpkg --set-selections < installed-software.log
 
 apt-get dselect-upgrade
 
-**Arch Linux**
-Backup
+
+#Arch Linux
+
+**Backup**
 
 pacman -Qqe | grep -v "$(pacman -Qmq)" > pkglist
 
-Restore
+**Restore**
 
 pacman -S $(cat pkglist)
 
-**openSUSE
-Backup
+
+# openSUSE
+
+**Backup**
 
 rpm -qa > installed-software.bak
 
-Restore
+**Restore**
 
 sudo zypper install $(cat installed-software.bak)
 
