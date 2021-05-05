@@ -673,18 +673,48 @@ alias prsc="sudo pacman -Rsc"
 alias pA="sudo pacman -A"
 alias pU="sudo pacman -U"
 alias pO="sudo pacman-optimize"
-alias ysyu="yaourt -Syu --aur --noconfirm"
-alias trimroot="sudo fstrim -v /"
-alias trimhome="sudo fstrim -v /home"
-alias repo="sudo reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist"
-alias team="sudo systemctl start teamviewerd"
-alias net="nmap -sP 192.168.1.1/24"
-alias wifi="sudo modprobe brcmsmac"
-alias mega="megacopy --local megatools --remote /Root/Uploads"
-alias weather="curl wttr.in/Thessaloniki"
-alias youtube="youtube-dl --extract-audio --audio-format mp3"
+
+# AUR alias
+alias ysyu="yay -Syu --aur --noconfirm"
+
+# Flatpak aliases
+alias flatup="sudo flatpak update"
+alias flatclean="sudo flatpak uninstall --unused"
+alias flatclear="sudo rm -rf /var/tmp/flatpak-cache*"
+
+# Mixed commands for the system
+alias updater="psyu && ysyu && flatup && flatclean && flatclear && sudo pacman -Rcs $(pacman -Qdtq)"
+alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
+
+# Proton VPN
 alias protonc="sudo protonvpn connect"
 alias protons="sudo protonvpn c -f"
 alias protonst="sudo protonvpn disconnect"
+
+# Battery and misc info
+alias bat="acpi"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+alias infoi="inxi -b"
+
+# SSD trim
+alias trimroot="sudo fstrim -v /"
+alias trimhome="sudo fstrim -v /home"
+
+# Misc networking-server
+alias repo="sudo reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist"
+alias doker="sudo systemctl start docker"
 alias server="python -m SimpleHTTPServer 8000"
+alias net="nmap -sP 192.168.1.1/24"
+alias wifi="sudo modprobe brcmsmac"
+
+
+# Misc usefull
+alias upbash=". ~/.bashrc"
+alias mega="megacopy --local megatools --remote /Root/Uploads"
+alias youtube="youtube-dl --extract-audio --audio-format mp3"
 alias covid="curl snf-878293.vm.okeanos.grnet.gr"
+alias weather="curl wttr.in/Thessaloniki"
+alias metefrase="trans -t el "
+alias enose="pdfunite *.pdf out.pdf"
+alias png2pdf="convert *.png out.pdf"
+alias opensuse="wget http://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-GNOME-Live-x86_64-Current.iso"
