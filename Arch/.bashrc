@@ -683,7 +683,7 @@ alias flatclean="sudo flatpak uninstall --unused"
 alias flatclear="sudo rm -rf /var/tmp/flatpak-cache*"
 
 # Mixed commands for the system
-alias updater="psyu && ysyu && flatup && flatclean && flatclear && sudo pacman -Rcs $(pacman -Qdtq)"
+alias updater="psyu && ysyu && flatup && flatclean && flatclear && sudo pacman -Scc && rm -rf ~/.cache/*"
 alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
 
 # Proton VPN
