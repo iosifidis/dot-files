@@ -11,4 +11,4 @@
 
 ## Cheatsheet
 
-Κατεβάστε το αρχείο από [εδώ](./i3 - Reference Card.pdf)
+Κατεβάστε το αρχείο από [εδώ](./i3%20-%20Reference Card.pdf)
