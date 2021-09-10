@@ -1,0 +1,4162 @@
+<?xml version="1.0"?>
+<!DOCTYPE profile>
+<profile xmlns="http://www.suse.com/1.0/yast2ns" xmlns:config="http://www.suse.com/1.0/configns">
+  <add-on t="map">
+    <add_on_others t="list">
+      <listentry t="map">
+        <alias>download.opensuse.org-non-oss</alias>
+        <media_url>http://download.opensuse.org/tumbleweed/repo/non-oss/</media_url>
+        <name>Main Repository (NON-OSS)</name>
+        <priority t="integer">99</priority>
+        <product_dir>/</product_dir>
+      </listentry>
+      <listentry t="map">
+        <alias>download.opensuse.org-tumbleweed</alias>
+        <media_url>http://download.opensuse.org/update/tumbleweed/</media_url>
+        <name>Main Update Repository</name>
+        <priority t="integer">99</priority>
+        <product_dir>/</product_dir>
+      </listentry>
+      <listentry t="map">
+        <alias>google-chrome</alias>
+        <media_url>http://dl.google.com/linux/chrome/rpm/stable/x86_64</media_url>
+        <name>google-chrome</name>
+        <priority t="integer">99</priority>
+        <product_dir/>
+      </listentry>
+      <listentry t="map">
+        <alias>http-ftp.gwdg.de-5261e7a2</alias>
+        <media_url>http://ftp.gwdg.de/pub/linux/packman/suse/openSUSE_Tumbleweed/</media_url>
+        <name>Packman Repository</name>
+        <priority t="integer">99</priority>
+        <product_dir/>
+      </listentry>
+      <listentry t="map">
+        <alias>http-opensuse-guide.org-2f9ca646</alias>
+        <media_url>http://opensuse-guide.org/repo/openSUSE_Tumbleweed/</media_url>
+        <name>libdvdcss repository</name>
+        <priority t="integer">99</priority>
+        <product_dir/>
+      </listentry>
+      <listentry t="map">
+        <alias>repo-non-oss</alias>
+        <media_url>http://download.opensuse.org/tumbleweed/repo/non-oss/</media_url>
+        <name>openSUSE-Tumbleweed-Non-Oss</name>
+        <priority t="integer">99</priority>
+        <product_dir/>
+      </listentry>
+      <listentry t="map">
+        <alias>repo-update</alias>
+        <media_url>http://download.opensuse.org/update/tumbleweed/</media_url>
+        <name>openSUSE-Tumbleweed-Update</name>
+        <priority t="integer">99</priority>
+        <product_dir/>
+      </listentry>
+    </add_on_others>
+  </add-on>
+  <bootloader t="map">
+    <global t="map">
+      <append>splash=silent resume=/dev/disk/by-uuid/b8690e8d-f491-41b0-968b-6b1551d2d778 mitigations=auto quiet</append>
+      <cpu_mitigations>auto</cpu_mitigations>
+      <gfxmode>auto</gfxmode>
+      <hiddenmenu>false</hiddenmenu>
+      <os_prober>true</os_prober>
+      <secure_boot>true</secure_boot>
+      <terminal>gfxterm</terminal>
+      <timeout t="integer">3</timeout>
+      <trusted_grub>false</trusted_grub>
+      <update_nvram>true</update_nvram>
+      <xen_kernel_append>vga=gfx-1024x768x16</xen_kernel_append>
+    </global>
+    <loader_type>grub2</loader_type>
+  </bootloader>
+  <firewall t="map">
+    <default_zone>public</default_zone>
+    <enable_firewall t="boolean">true</enable_firewall>
+    <log_denied_packets>off</log_denied_packets>
+    <start_firewall t="boolean">true</start_firewall>
+    <zones t="list">
+      <zone t="map">
+        <description>Unsolicited incoming network packets are rejected. Incoming packets that are related to outgoing network connections are accepted. Outgoing network connections are allowed.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>block</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list"/>
+        <short>Block</short>
+        <target>%%REJECT%%</target>
+      </zone>
+      <zone t="map">
+        <description>For computers in your demilitarized zone that are publicly-accessible with limited access to your internal network. Only selected incoming connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>dmz</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list">
+          <service>ssh</service>
+        </services>
+        <short>DMZ</short>
+        <target>default</target>
+      </zone>
+      <zone t="map">
+        <description>All network connections are accepted.</description>
+        <interfaces t="list">
+          <interface>docker0</interface>
+        </interfaces>
+        <masquerade t="boolean">false</masquerade>
+        <name>docker</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list"/>
+        <short>docker</short>
+        <target>ACCEPT</target>
+      </zone>
+      <zone t="map">
+        <description>Unsolicited incoming network packets are dropped. Incoming packets that are related to outgoing network connections are accepted. Outgoing network connections are allowed.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>drop</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list"/>
+        <short>Drop</short>
+        <target>DROP</target>
+      </zone>
+      <zone t="map">
+        <description>For use on external networks. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">true</masquerade>
+        <name>external</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list">
+          <service>ssh</service>
+        </services>
+        <short>External</short>
+        <target>default</target>
+      </zone>
+      <zone t="map">
+        <description>For use in home areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>home</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list">
+          <service>dhcpv6-client</service>
+          <service>mdns</service>
+          <service>samba-client</service>
+          <service>ssh</service>
+        </services>
+        <short>Home</short>
+        <target>default</target>
+      </zone>
+      <zone t="map">
+        <description>For use on internal networks. You mostly trust the other computers on the networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>internal</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list">
+          <service>dhcpv6-client</service>
+          <service>mdns</service>
+          <service>samba-client</service>
+          <service>ssh</service>
+        </services>
+        <short>Internal</short>
+        <target>default</target>
+      </zone>
+      <zone t="map">
+        <description>     This zone is used internally by NetworkManager when activating a     profile that uses connection sharing and doesn't have an explicit     firewall zone set.     Block all traffic to the local machine except ICMP, ICMPv6, DHCP     and DNS. Allow all forwarded traffic.     Note that future package updates may change the definition of the     zone unless you overwrite it with your own definition.   </description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>nm-shared</name>
+        <ports t="list"/>
+        <protocols t="list">
+          <listentry>icmp</listentry>
+          <listentry>ipv6-icmp</listentry>
+        </protocols>
+        <services t="list">
+          <service>dhcp</service>
+          <service>dns</service>
+          <service>ssh</service>
+        </services>
+        <short>NetworkManager Shared</short>
+        <target>ACCEPT</target>
+      </zone>
+      <zone t="map">
+        <description>For use in public areas. You do not trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>public</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list">
+          <service>dhcpv6-client</service>
+        </services>
+        <short>Public</short>
+        <target>default</target>
+      </zone>
+      <zone t="map">
+        <description>All network connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>trusted</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list"/>
+        <short>Trusted</short>
+        <target>ACCEPT</target>
+      </zone>
+      <zone t="map">
+        <description>For use in work areas. You mostly trust the other computers on networks to not harm your computer. Only selected incoming connections are accepted.</description>
+        <interfaces t="list"/>
+        <masquerade t="boolean">false</masquerade>
+        <name>work</name>
+        <ports t="list"/>
+        <protocols t="list"/>
+        <services t="list">
+          <service>dhcpv6-client</service>
+          <service>ssh</service>
+        </services>
+        <short>Work</short>
+        <target>default</target>
+      </zone>
+    </zones>
+  </firewall>
+  <general t="map">
+    <mode t="map">
+      <confirm t="boolean">false</confirm>
+    </mode>
+  </general>
+  <groups t="list">
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>100</gid>
+      <group_password>x</group_password>
+      <groupname>users</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>475</gid>
+      <group_password>x</group_password>
+      <groupname>wsdd</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>478</gid>
+      <group_password>x</group_password>
+      <groupname>rtkit</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>98</gid>
+      <group_password>x</group_password>
+      <groupname>tss</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>492</gid>
+      <group_password>x</group_password>
+      <groupname>kmem</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>499</gid>
+      <group_password>x</group_password>
+      <groupname>avahi</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>36</gid>
+      <group_password>x</group_password>
+      <groupname>kvm</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>470</gid>
+      <group_password>x</group_password>
+      <groupname>brltty</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>468</gid>
+      <group_password>x</group_password>
+      <groupname>wheel</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>462</gid>
+      <group_password>x</group_password>
+      <groupname>chrony</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>459</gid>
+      <group_password>x</group_password>
+      <groupname>pulse</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>483</gid>
+      <group_password>x</group_password>
+      <groupname>sgx</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>467</gid>
+      <group_password>x</group_password>
+      <groupname>audit</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>476</gid>
+      <group_password>x</group_password>
+      <groupname>scard</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>71</gid>
+      <group_password>x</group_password>
+      <groupname>ntadmin</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>465</gid>
+      <group_password>x</group_password>
+      <groupname>nscd</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>479</gid>
+      <group_password>x</group_password>
+      <groupname>polkitd</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>457</gid>
+      <group_password>x</group_password>
+      <groupname>nm-openvpn</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>460</gid>
+      <group_password>x</group_password>
+      <groupname>vnc</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>2</gid>
+      <group_password>x</group_password>
+      <groupname>daemon</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>464</gid>
+      <group_password>x</group_password>
+      <groupname>colord</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>62</gid>
+      <group_password>x</group_password>
+      <groupname>man</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>477</gid>
+      <group_password>x</group_password>
+      <groupname>brlapi</groupname>
+      <userlist>brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>491</gid>
+      <group_password>x</group_password>
+      <groupname>utmp</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>65534</gid>
+      <group_password>x</group_password>
+      <groupname>nobody</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>456</gid>
+      <group_password>x</group_password>
+      <groupname>nm-openconnect</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>486</gid>
+      <group_password>x</group_password>
+      <groupname>input</groupname>
+      <userlist>brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>1</gid>
+      <group_password>x</group_password>
+      <groupname>bin</groupname>
+      <userlist>daemon</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>494</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-timesync</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>461</gid>
+      <group_password>x</group_password>
+      <groupname>sshd</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>455</gid>
+      <group_password>x</group_password>
+      <groupname>docker</groupname>
+      <userlist>yolo</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>493</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-coredump</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>484</gid>
+      <group_password>x</group_password>
+      <groupname>render</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>0</gid>
+      <group_password>x</group_password>
+      <groupname>root</groupname>
+      <userlist>brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>474</gid>
+      <group_password>x</group_password>
+      <groupname>tftp</groupname>
+      <userlist>dnsmasq</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>59</gid>
+      <group_password>x</group_password>
+      <groupname>maildrop</groupname>
+      <userlist>postfix</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>42</gid>
+      <group_password>x</group_password>
+      <groupname>trusted</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>496</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-network</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>458</gid>
+      <group_password>x</group_password>
+      <groupname>svn</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>463</gid>
+      <group_password>x</group_password>
+      <groupname>statd</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>473</gid>
+      <group_password>x</group_password>
+      <groupname>srvGeoClue</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>466</gid>
+      <group_password>x</group_password>
+      <groupname>rpc</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>65533</gid>
+      <group_password>x</group_password>
+      <groupname>nogroup</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>489</gid>
+      <group_password>x</group_password>
+      <groupname>cdrom</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>495</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-resolve</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>480</gid>
+      <group_password>x</group_password>
+      <groupname>messagebus</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>471</gid>
+      <group_password>x</group_password>
+      <groupname>pulse-access</groupname>
+      <userlist>brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>482</gid>
+      <group_password>x</group_password>
+      <groupname>tape</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>472</gid>
+      <group_password>x</group_password>
+      <groupname>mail</groupname>
+      <userlist>postfix</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>490</gid>
+      <group_password>x</group_password>
+      <groupname>audio</groupname>
+      <userlist>pulse,brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>51</gid>
+      <group_password>x</group_password>
+      <groupname>postfix</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>469</gid>
+      <group_password>x</group_password>
+      <groupname>flatpak</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>488</gid>
+      <group_password>x</group_password>
+      <groupname>dialout</groupname>
+      <userlist>brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>487</gid>
+      <group_password>x</group_password>
+      <groupname>disk</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>481</gid>
+      <group_password>x</group_password>
+      <groupname>video</groupname>
+      <userlist>gdm</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>498</gid>
+      <group_password>x</group_password>
+      <groupname>lock</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>485</gid>
+      <group_password>x</group_password>
+      <groupname>lp</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>15</gid>
+      <group_password>x</group_password>
+      <groupname>shadow</groupname>
+      <userlist>vnc</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>497</gid>
+      <group_password>x</group_password>
+      <groupname>systemd-journal</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>5</gid>
+      <group_password>x</group_password>
+      <groupname>tty</groupname>
+      <userlist>brltty</userlist>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>452</gid>
+      <group_password>!</group_password>
+      <groupname>dockremap</groupname>
+      <userlist/>
+    </group>
+    <group t="map">
+      <encrypted t="boolean">true</encrypted>
+      <gid>454</gid>
+      <group_password>x</group_password>
+      <groupname>gdm</groupname>
+      <userlist/>
+    </group>
+  </groups>
+  <host t="map">
+    <hosts t="list">
+      <hosts_entry t="map">
+        <host_address>127.0.0.1</host_address>
+        <names t="list">
+          <name>localhost</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>192.168.1.200</host_address>
+        <names t="list">
+          <name>seedbox</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>::1</host_address>
+        <names t="list">
+          <name>localhost ipv6-localhost ipv6-loopback</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>fe00::0</host_address>
+        <names t="list">
+          <name>ipv6-localnet</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff00::0</host_address>
+        <names t="list">
+          <name>ipv6-mcastprefix</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff02::1</host_address>
+        <names t="list">
+          <name>ipv6-allnodes</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff02::2</host_address>
+        <names t="list">
+          <name>ipv6-allrouters</name>
+        </names>
+      </hosts_entry>
+      <hosts_entry t="map">
+        <host_address>ff02::3</host_address>
+        <names t="list">
+          <name>ipv6-allhosts</name>
+        </names>
+      </hosts_entry>
+    </hosts>
+  </host>
+  <keyboard t="map">
+    <keymap>english-us</keymap>
+  </keyboard>
+  <language t="map">
+    <language>el_GR</language>
+    <languages>en_US,el_GR</languages>
+  </language>
+  <networking t="map">
+    <dns t="map">
+      <dhcp_hostname t="boolean">false</dhcp_hostname>
+      <hostname>lenovo</hostname>
+      <resolv_conf_policy>auto</resolv_conf_policy>
+    </dns>
+    <ipv6 t="boolean">true</ipv6>
+    <keep_install_network t="boolean">true</keep_install_network>
+    <managed t="boolean">true</managed>
+  </networking>
+  <ntp-client t="map">
+    <ntp_policy>auto</ntp_policy>
+    <ntp_servers t="list">
+      <ntp_server t="map">
+        <address>0.opensuse.pool.ntp.org</address>
+        <iburst t="boolean">true</iburst>
+        <offline t="boolean">false</offline>
+      </ntp_server>
+      <ntp_server t="map">
+        <address>1.opensuse.pool.ntp.org</address>
+        <iburst t="boolean">true</iburst>
+        <offline t="boolean">false</offline>
+      </ntp_server>
+      <ntp_server t="map">
+        <address>2.opensuse.pool.ntp.org</address>
+        <iburst t="boolean">true</iburst>
+        <offline t="boolean">false</offline>
+      </ntp_server>
+      <ntp_server t="map">
+        <address>3.opensuse.pool.ntp.org</address>
+        <iburst t="boolean">true</iburst>
+        <offline t="boolean">false</offline>
+      </ntp_server>
+    </ntp_servers>
+    <ntp_sync>systemd</ntp_sync>
+  </ntp-client>
+  <partitioning t="list">
+    <drive t="map">
+      <device>/dev/sda</device>
+      <disklabel>msdos</disklabel>
+      <enable_snapshots t="boolean">false</enable_snapshots>
+      <partitions t="list">
+        <partition t="map">
+          <create t="boolean">true</create>
+          <filesystem t="symbol">ext4</filesystem>
+          <format t="boolean">true</format>
+          <mount>/</mount>
+          <mountby t="symbol">uuid</mountby>
+          <partition_id t="integer">131</partition_id>
+          <partition_nr t="integer">1</partition_nr>
+          <partition_type>primary</partition_type>
+          <resize t="boolean">false</resize>
+          <size>41943000064</size>
+        </partition>
+        <partition t="map">
+          <create t="boolean">true</create>
+          <filesystem t="symbol">swap</filesystem>
+          <format t="boolean">true</format>
+          <mount>swap</mount>
+          <mountby t="symbol">uuid</mountby>
+          <partition_id t="integer">130</partition_id>
+          <partition_nr t="integer">2</partition_nr>
+          <partition_type>primary</partition_type>
+          <resize t="boolean">false</resize>
+          <size>8388608000</size>
+        </partition>
+        <partition t="map">
+          <create t="boolean">true</create>
+          <filesystem t="symbol">ext4</filesystem>
+          <format t="boolean">true</format>
+          <fstopt>data=ordered</fstopt>
+          <mount>/home</mount>
+          <mountby t="symbol">uuid</mountby>
+          <partition_id t="integer">131</partition_id>
+          <partition_nr t="integer">3</partition_nr>
+          <partition_type>primary</partition_type>
+          <resize t="boolean">false</resize>
+          <size>69701427200</size>
+        </partition>
+      </partitions>
+      <type t="symbol">CT_DISK</type>
+      <use>all</use>
+    </drive>
+  </partitioning>
+  <printer t="map">
+    <client_conf_content t="map">
+      <file_contents># CUPS client configuration file (optional).
+
+# You may use /etc/cups/client.conf (system wide)
+# or ~/.cups/client.conf (per user).
+# For more information see "man 5 client.conf".
+
+# The ServerName directive specifies the remote server
+# that is to be used for all client operations. That is, it
+# redirects all client requests directly to that remote server
+# so that a local running cupsd is not used in this case.
+# The default is to use the local server ("localhost") or domain socket.
+# Only one ServerName directive may appear.
+# If multiple names are present, only the last one is used.
+# The default port number is 631 but can be overridden by adding
+# a colon followed by the desired port number.
+# The default IPP version is 2.0 but can be overridden by adding
+# a slash followed by version=V where V is 1.0 or 1.1 or 2.0 or 2.1 or 2.2.
+# IPP version 2.0 does do not work with CUPS 1.3 or older servers.
+# If an CUPS 1.3 or older server is used, its older IPP version
+# must be specified as .../version=1.1 or .../version=1.0.
+
+# Examples:
+# ServerName sever.example.com
+# ServerName 192.0.2.10
+# ServerName sever.example.com:8631
+# ServerName older.server.example.com/version=1.1
+# ServerName older.server.example.com:8631/version=1.1
+
+</file_contents>
+    </client_conf_content>
+    <cupsd_conf_content t="map">
+      <file_contents>#
+# Configuration file for the CUPS scheduler.  See "man cupsd.conf" for a
+# complete description of this file.
+#
+
+# Log general information in error_log - change "warn" to "debug"
+# for troubleshooting...
+LogLevel warn
+PageLogFormat
+
+# Specifies the maximum size of the log files before they are rotated.  The value "0" disables log rotation.
+MaxLogSize 1m
+
+# Default error policy for printers
+ErrorPolicy stop-printer
+
+# Only listen for connections from the local machine.
+Listen localhost:631
+Listen /run/cups/cups.sock
+
+# Show shared printers on the local network.
+Browsing On
+BrowseLocalProtocols dnssd
+
+# Default authentication type, when authentication is required...
+DefaultAuthType Basic
+
+# Web interface setting...
+WebInterface Yes
+
+# Restrict access to the server...
+&lt;Location /&gt;
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to the admin pages...
+&lt;Location /admin&gt;
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to configuration files...
+&lt;Location /admin/conf&gt;
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Restrict access to log files...
+&lt;Location /admin/log&gt;
+  AuthType Default
+  Require user @SYSTEM
+  Order allow,deny
+&lt;/Location&gt;
+
+# Set the default printer/job policies...
+&lt;Policy default&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default CUPS-Get-Devices&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the authenticated printer/job policies...
+&lt;Policy authenticated&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Default
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Default
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Default
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# Set the kerberized printer/job policies...
+&lt;Policy kerberos&gt;
+  # Job/subscription privacy...
+  JobPrivateAccess default
+  JobPrivateValues default
+  SubscriptionPrivateAccess default
+  SubscriptionPrivateValues default
+
+  # Job-related operations must be done by the owner or an administrator...
+  &lt;Limit Create-Job Print-Job Print-URI Validate-Job&gt;
+    AuthType Negotiate
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit Send-Document Send-URI Hold-Job Release-Job Restart-Job Purge-Jobs Set-Job-Attributes Create-Job-Subscription Renew-Subscription Cancel-Subscription Get-Notifications Reprocess-Job Cancel-Current-Job Suspend-Current-Job Resume-Job Cancel-My-Jobs Close-Job CUPS-Move-Job CUPS-Get-Document&gt;
+    AuthType Negotiate
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All administration operations require an administrator to authenticate...
+  &lt;Limit CUPS-Add-Modify-Printer CUPS-Delete-Printer CUPS-Add-Modify-Class CUPS-Delete-Class CUPS-Set-Default&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # All printer operations require a printer operator to authenticate...
+  &lt;Limit Pause-Printer Resume-Printer Enable-Printer Disable-Printer Pause-Printer-After-Current-Job Hold-New-Jobs Release-Held-New-Jobs Deactivate-Printer Activate-Printer Restart-Printer Shutdown-Printer Startup-Printer Promote-Job Schedule-Job-After Cancel-Jobs CUPS-Accept-Jobs CUPS-Reject-Jobs&gt;
+    AuthType Default
+    Require user @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  # Only the owner or an administrator can cancel or authenticate a job...
+  &lt;Limit Cancel-Job CUPS-Authenticate-Job&gt;
+    AuthType Negotiate
+    Require user @OWNER @SYSTEM
+    Order deny,allow
+  &lt;/Limit&gt;
+
+  &lt;Limit All&gt;
+    Order deny,allow
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+
+# The policy below is added by SUSE during build of our cups package.
+# The policy 'allowallforanybody' is totally open and insecure and therefore
+# it can only be used within an internal network where only trused users exist
+# and where the cupsd is not accessible at all from any external host, see
+# http://en.opensuse.org/SDB:CUPS_and_SANE_Firewall_settings
+# Have in mind that any user who is allowed to do printer admin tasks
+# can change the print queues as he likes - e.g. send copies of confidental
+# print jobs from an internal network to any external destination, see
+# http://en.opensuse.org/SDB:CUPS_in_a_Nutshell
+# For documentation regarding 'Managing Operation Policies' see
+# http://www.cups.org/documentation.php/doc-1.7/policies.html
+&lt;Policy allowallforanybody&gt;
+  # Allow anybody to access job's private values:
+  JobPrivateAccess all
+  # Make none of the job values to be private:
+  JobPrivateValues none
+  # Allow anybody to access subscription's private values:
+  SubscriptionPrivateAccess all
+  # Make none of the subscription values to be private:
+  SubscriptionPrivateValues none
+  # Allow anybody to do all IPP operations:
+  # Currently the IPP operations Validate-Job Cancel-Jobs Cancel-My-Jobs Close-Job CUPS-Get-Document
+  # must be additionally exlicitly specified because those IPP operations are not included
+  # in the "All" wildcard value - otherwise cupsd prints error messages of the form
+  # "No limit for Validate-Job defined in policy allowallforanybody and no suitable template found."
+  &lt;Limit Validate-Job Cancel-Jobs Cancel-My-Jobs Close-Job CUPS-Get-Document&gt;
+    Order deny,allow
+    Allow from all
+  &lt;/Limit&gt;
+  # Since CUPS &gt; 1.5.4 the "All" wildcard value must be specified separately,
+  # otherwise clients like "lpstat -p" just hang up,
+  # see https://bugzilla.opensuse.org/show_bug.cgi?id=936309
+  # and https://www.cups.org/str.php?L4659
+  &lt;Limit All&gt;
+    Order deny,allow
+    Allow from all
+  &lt;/Limit&gt;
+&lt;/Policy&gt;
+# Explicitly set the CUPS 'default' policy to be used by default:
+DefaultPolicy default
+
+</file_contents>
+    </cupsd_conf_content>
+  </printer>
+  <proxy t="map">
+    <enabled t="boolean">false</enabled>
+  </proxy>
+  <services-manager t="map">
+    <default_target>graphical</default_target>
+    <services t="map">
+      <enable t="list">
+        <service>ModemManager</service>
+        <service>NetworkManager</service>
+        <service>NetworkManager-dispatcher</service>
+        <service>NetworkManager-wait-online</service>
+        <service>YaST2-Firstboot</service>
+        <service>YaST2-Second-Stage</service>
+        <service>apparmor</service>
+        <service>appstream-sync-cache</service>
+        <service>auditd</service>
+        <service>avahi-daemon</service>
+        <service>bluetooth</service>
+        <service>chronyd</service>
+        <service>cron</service>
+        <service>cups</service>
+        <service>firewalld</service>
+        <service>display-manager</service>
+        <service>haveged</service>
+        <service>irqbalance</service>
+        <service>issue-generator</service>
+        <service>kbdsettings</service>
+        <service>lvm2-monitor</service>
+        <service>mcelog</service>
+        <service>nscd</service>
+        <service>postfix</service>
+        <service>purge-kernels</service>
+        <service>smartd</service>
+        <service>systemd-fsck-root</service>
+        <service>systemd-remount-fs</service>
+      </enable>
+      <on_demand t="list">
+        <listentry>pcscd</listentry>
+      </on_demand>
+    </services>
+  </services-manager>
+  <software t="map">
+    <install_recommended t="boolean">true</install_recommended>
+    <instsource/>
+    <packages t="list">
+      <package>zypper-needs-restarting</package>
+      <package>zypper-log</package>
+      <package>zypper-lifecycle-plugin</package>
+      <package>zypper</package>
+      <package>zisofs-tools</package>
+      <package>zip</package>
+      <package>zeromq-tools</package>
+      <package>zenity-lang</package>
+      <package>zenity</package>
+      <package>yelp-xsl</package>
+      <package>yelp-lang</package>
+      <package>yelp</package>
+      <package>yast2-ycp-ui-bindings</package>
+      <package>yast2-xml</package>
+      <package>yast2-x11</package>
+      <package>yast2-vm</package>
+      <package>yast2-users</package>
+      <package>yast2-update</package>
+      <package>yast2-transfer</package>
+      <package>yast2-trans-stats</package>
+      <package>yast2-trans-el</package>
+      <package>yast2-theme</package>
+      <package>yast2-sysconfig</package>
+      <package>yast2-storage-ng</package>
+      <package>yast2-sound</package>
+      <package>yast2-slp</package>
+      <package>yast2-services-manager</package>
+      <package>yast2-security</package>
+      <package>yast2-scanner</package>
+      <package>yast2-samba-server</package>
+      <package>yast2-samba-client</package>
+      <package>yast2-ruby-bindings</package>
+      <package>yast2-qt-branding-openSUSE</package>
+      <package>yast2-python3-bindings</package>
+      <package>yast2-proxy</package>
+      <package>yast2-printer</package>
+      <package>yast2-pkg-bindings</package>
+      <package>yast2-perl-bindings</package>
+      <package>yast2-pam</package>
+      <package>yast2-packager</package>
+      <package>yast2-online-update</package>
+      <package>yast2-ntp-client</package>
+      <package>yast2-network</package>
+      <package>yast2-metapackage-handler</package>
+      <package>yast2-logs</package>
+      <package>yast2-ldap</package>
+      <package>yast2-journal</package>
+      <package>yast2-installation</package>
+      <package>yast2-hardware-detection</package>
+      <package>yast2-firewall</package>
+      <package>yast2-country-data</package>
+      <package>yast2-country</package>
+      <package>yast2-core</package>
+      <package>yast2-control-center-qt</package>
+      <package>yast2-control-center</package>
+      <package>yast2-bootloader</package>
+      <package>yast2-apparmor</package>
+      <package>yast2-alternatives</package>
+      <package>yast2-add-on</package>
+      <package>yast2</package>
+      <package>xz</package>
+      <package>xwayland</package>
+      <package>xtermset</package>
+      <package>xterm-bin</package>
+      <package>xterm</package>
+      <package>xtables-plugins</package>
+      <package>xsetroot</package>
+      <package>xset</package>
+      <package>xscreensaver-lang</package>
+      <package>xscreensaver-data</package>
+      <package>xscreensaver</package>
+      <package>xrdb</package>
+      <package>xrandr</package>
+      <package>xprop</package>
+      <package>xorg-x11-server-extra</package>
+      <package>xorg-x11-server-Xvfb</package>
+      <package>xorg-x11-server</package>
+      <package>xorg-x11-libX11-ccache</package>
+      <package>xorg-x11-fonts-legacy</package>
+      <package>xorg-x11-fonts-core</package>
+      <package>xorg-x11-fonts-converted</package>
+      <package>xorg-x11-fonts</package>
+      <package>xorg-x11-essentials</package>
+      <package>xorg-x11-driver-video</package>
+      <package>xorg-x11-Xvnc-module</package>
+      <package>xorg-x11-Xvnc</package>
+      <package>xmodmap</package>
+      <package>xml-commons-apis</package>
+      <package>xmessage</package>
+      <package>xli</package>
+      <package>xkeyboard-config-lang</package>
+      <package>xkeyboard-config</package>
+      <package>xkbcomp</package>
+      <package>xinit</package>
+      <package>xhost</package>
+      <package>xfsprogs</package>
+      <package>xf86-video-vesa</package>
+      <package>xf86-video-fbdev</package>
+      <package>xf86-input-wacom</package>
+      <package>xf86-input-vmmouse</package>
+      <package>xf86-input-libinput</package>
+      <package>xf86-input-keyboard</package>
+      <package>xf86-input-joystick</package>
+      <package>xf86-input-evdev</package>
+      <package>xen-libs</package>
+      <package>xdmbgrd</package>
+      <package>xdm</package>
+      <package>xdg-utils</package>
+      <package>xdg-user-dirs-lang</package>
+      <package>xdg-user-dirs-gtk-lang</package>
+      <package>xdg-user-dirs-gtk</package>
+      <package>xdg-user-dirs</package>
+      <package>xdg-menu</package>
+      <package>xdg-desktop-portal-gtk</package>
+      <package>xdg-desktop-portal</package>
+      <package>xdg-dbus-proxy</package>
+      <package>xconsole</package>
+      <package>xclock</package>
+      <package>xclip</package>
+      <package>xbrlapi</package>
+      <package>xbitmaps</package>
+      <package>xauth</package>
+      <package>x11-tools</package>
+      <package>wsdd</package>
+      <package>wpa_supplicant</package>
+      <package>wol</package>
+      <package>wmctrl</package>
+      <package>wireless-tools</package>
+      <package>wireless-regdb</package>
+      <package>which</package>
+      <package>wget-lang</package>
+      <package>wget</package>
+      <package>webkit2gtk-4_0-injected-bundles</package>
+      <package>wallpaper-branding-openSUSE</package>
+      <package>vte-lang</package>
+      <package>vpnc</package>
+      <package>vorbis-tools</package>
+      <package>vlc</package>
+      <package>vlan</package>
+      <package>virt-what</package>
+      <package>vinagre-lang</package>
+      <package>vinagre</package>
+      <package>vim-data-common</package>
+      <package>vim-data</package>
+      <package>vim</package>
+      <package>util-linux-systemd</package>
+      <package>util-linux</package>
+      <package>usbutils</package>
+      <package>usbmuxd</package>
+      <package>usb_modeswitch-data</package>
+      <package>usb_modeswitch</package>
+      <package>upower</package>
+      <package>update-alternatives</package>
+      <package>unzip-doc</package>
+      <package>unzip</package>
+      <package>unar</package>
+      <package>udisks2-lang</package>
+      <package>udisks2</package>
+      <package>udev-configure-printer</package>
+      <package>udev</package>
+      <package>ucode-intel</package>
+      <package>ucode-amd</package>
+      <package>typelib-1_0-libdazzle-1_0</package>
+      <package>typelib-1_0-Zpj-0_0</package>
+      <package>typelib-1_0-Wnck-3_0</package>
+      <package>typelib-1_0-WebKit2-4_0</package>
+      <package>typelib-1_0-Vte-2.91</package>
+      <package>typelib-1_0-UpowerGlib-1_0</package>
+      <package>typelib-1_0-Tracker-3_0</package>
+      <package>typelib-1_0-TotemPlParser-1_0</package>
+      <package>typelib-1_0-TelepathyLogger-0_2</package>
+      <package>typelib-1_0-TelepathyGlib-0_12</package>
+      <package>typelib-1_0-Soup-2_4</package>
+      <package>typelib-1_0-Secret-1</package>
+      <package>typelib-1_0-Rsvg-2_0</package>
+      <package>typelib-1_0-Rest-0_7</package>
+      <package>typelib-1_0-Polkit-1_0</package>
+      <package>typelib-1_0-PeasGtk-1_0</package>
+      <package>typelib-1_0-Peas-1_0</package>
+      <package>typelib-1_0-Pango-1_0</package>
+      <package>typelib-1_0-PackageKitGlib-1_0</package>
+      <package>typelib-1_0-Notify-0_7</package>
+      <package>typelib-1_0-NMA-1_0</package>
+      <package>typelib-1_0-NM-1_0</package>
+      <package>typelib-1_0-MediaArt-2_0</package>
+      <package>typelib-1_0-Malcontent-0</package>
+      <package>typelib-1_0-Json-1_0</package>
+      <package>typelib-1_0-JavaScriptCore-4_0</package>
+      <package>typelib-1_0-IBus-1_0</package>
+      <package>typelib-1_0-HarfBuzz-0_0</package>
+      <package>typelib-1_0-Handy-1_0</package>
+      <package>typelib-1_0-GtkSource-4</package>
+      <package>typelib-1_0-GtkClutter-1_0</package>
+      <package>typelib-1_0-Gtk-4_0</package>
+      <package>typelib-1_0-Gtk-3_0</package>
+      <package>typelib-1_0-GstVideo-1_0</package>
+      <package>typelib-1_0-GstTag-1_0</package>
+      <package>typelib-1_0-GstPbutils-1_0</package>
+      <package>typelib-1_0-GstAudio-1_0</package>
+      <package>typelib-1_0-Gst-1_0</package>
+      <package>typelib-1_0-Gspell-1</package>
+      <package>typelib-1_0-Grl-0_3</package>
+      <package>typelib-1_0-Graphene-1_0</package>
+      <package>typelib-1_0-Goa-1_0</package>
+      <package>typelib-1_0-GnomeDesktop-3_0</package>
+      <package>typelib-1_0-GnomeBluetooth-1_0</package>
+      <package>typelib-1_0-GjsPrivate-1_0</package>
+      <package>typelib-1_0-GeocodeGlib-1_0</package>
+      <package>typelib-1_0-Geoclue-2_0</package>
+      <package>typelib-1_0-Gdm-1_0</package>
+      <package>typelib-1_0-GdkPixbuf-2_0</package>
+      <package>typelib-1_0-Gcr-3</package>
+      <package>typelib-1_0-Gck-1</package>
+      <package>typelib-1_0-GWeather-3_0</package>
+      <package>typelib-1_0-GMenu-3_0</package>
+      <package>typelib-1_0-GFBGraph-0_2</package>
+      <package>typelib-1_0-GData-0_0</package>
+      <package>typelib-1_0-Fwupd-2_0</package>
+      <package>typelib-1_0-EvinceView-3_0</package>
+      <package>typelib-1_0-EvinceDocument-3_0</package>
+      <package>typelib-1_0-CoglPango-1_0</package>
+      <package>typelib-1_0-Cogl-1_0</package>
+      <package>typelib-1_0-Clutter-1_0</package>
+      <package>typelib-1_0-Champlain-0_12</package>
+      <package>typelib-1_0-Atspi-2_0</package>
+      <package>typelib-1_0-Atk-1_0</package>
+      <package>typelib-1_0-AccountsService-1_0</package>
+      <package>tuned</package>
+      <package>trousers</package>
+      <package>tree</package>
+      <package>transmission-gtk-lang</package>
+      <package>transmission-gtk</package>
+      <package>transmission-common</package>
+      <package>translation-update-el</package>
+      <package>translation-update</package>
+      <package>translate-shell</package>
+      <package>tracker2-miners-lang</package>
+      <package>tracker2-miners</package>
+      <package>tracker2-miner-files</package>
+      <package>tracker2-lang</package>
+      <package>tracker2</package>
+      <package>tracker-miners-lang</package>
+      <package>tracker-miners</package>
+      <package>tracker-miner-files</package>
+      <package>tracker-lang</package>
+      <package>tracker-data-files</package>
+      <package>tracker</package>
+      <package>traceroute</package>
+      <package>tpm-tools</package>
+      <package>totem-plugins</package>
+      <package>totem-pl-parser-lang</package>
+      <package>totem-pl-parser</package>
+      <package>totem-lang</package>
+      <package>totem</package>
+      <package>tnftp</package>
+      <package>tlp-rdw</package>
+      <package>tlp</package>
+      <package>tk</package>
+      <package>timezone-java</package>
+      <package>timezone</package>
+      <package>time</package>
+      <package>tigervnc</package>
+      <package>thryomanes-fonts</package>
+      <package>thin-provisioning-tools</package>
+      <package>thessalonica-theano-otf-fonts</package>
+      <package>thessalonica-oldstandard-otf-fonts</package>
+      <package>texlive-lm-fonts</package>
+      <package>testdisk</package>
+      <package>terminfo-screen</package>
+      <package>terminfo-iterm</package>
+      <package>terminfo-base</package>
+      <package>terminfo</package>
+      <package>tepl-6-lang</package>
+      <package>telepathy-mission-control</package>
+      <package>telepathy-logger</package>
+      <package>telepathy-idle</package>
+      <package>tcl</package>
+      <package>tar-rmt</package>
+      <package>tar-lang</package>
+      <package>tar</package>
+      <package>sysvinit-tools</package>
+      <package>sysuser-shadow</package>
+      <package>systemd-sysvinit</package>
+      <package>systemd-rpm-macros</package>
+      <package>systemd-presets-common-SUSE</package>
+      <package>systemd-presets-branding-openSUSE</package>
+      <package>systemd-logger</package>
+      <package>systemd-lang</package>
+      <package>systemd-doc</package>
+      <package>systemd-default-settings-branding-openSUSE</package>
+      <package>systemd-default-settings</package>
+      <package>systemd</package>
+      <package>system-user-tftp</package>
+      <package>system-user-srvGeoClue</package>
+      <package>system-user-root</package>
+      <package>system-user-nobody</package>
+      <package>system-user-man</package>
+      <package>system-user-mail</package>
+      <package>system-user-lp</package>
+      <package>system-user-flatpak</package>
+      <package>system-user-daemon</package>
+      <package>system-user-bin</package>
+      <package>system-tuning-common-SUSE</package>
+      <package>system-group-wheel</package>
+      <package>system-group-kvm</package>
+      <package>system-group-hardware</package>
+      <package>system-group-audit</package>
+      <package>system-config-printer-dbus-service</package>
+      <package>system-config-printer-common-lang</package>
+      <package>system-config-printer-common</package>
+      <package>system-config-printer-applet</package>
+      <package>system-config-printer</package>
+      <package>syslinux</package>
+      <package>sysconfig-netconfig</package>
+      <package>sysconfig</package>
+      <package>swell-foop-lang</package>
+      <package>swell-foop</package>
+      <package>sushi-lang</package>
+      <package>sushi</package>
+      <package>susepaste-screenshot</package>
+      <package>susepaste</package>
+      <package>suse-module-tools</package>
+      <package>sudo-plugin-python</package>
+      <package>sudo</package>
+      <package>strace</package>
+      <package>stix-fonts</package>
+      <package>star</package>
+      <package>speech-dispatcher-module-espeak</package>
+      <package>speech-dispatcher</package>
+      <package>spax</package>
+      <package>sox</package>
+      <package>sound-theme-freedesktop</package>
+      <package>snmp-mibs</package>
+      <package>smplayer</package>
+      <package>smp_utils</package>
+      <package>smartmontools</package>
+      <package>simplescreenrecorder</package>
+      <package>simple-scan-lang</package>
+      <package>simple-scan</package>
+      <package>shim</package>
+      <package>sharutils-lang</package>
+      <package>sharutils</package>
+      <package>shared-python-startup</package>
+      <package>shared-mime-info-lang</package>
+      <package>shared-mime-info</package>
+      <package>shadow</package>
+      <package>sgml-skel</package>
+      <package>sg3_utils</package>
+      <package>setxkbmap</package>
+      <package>setserial</package>
+      <package>sessreg</package>
+      <package>sensors</package>
+      <package>sed-lang</package>
+      <package>sed</package>
+      <package>seahorse-nautilus-lang</package>
+      <package>seahorse-lang</package>
+      <package>seahorse-daemon</package>
+      <package>seahorse</package>
+      <package>screen</package>
+      <package>scout-command-not-found</package>
+      <package>scout</package>
+      <package>sbc</package>
+      <package>sane-backends-autoconfig</package>
+      <package>sane-backends</package>
+      <package>samba-python3</package>
+      <package>samba-libs-python3</package>
+      <package>samba-libs</package>
+      <package>samba-client</package>
+      <package>samba</package>
+      <package>sac</package>
+      <package>ruby2.7-rubygem-unf_ext</package>
+      <package>ruby2.7-rubygem-unf</package>
+      <package>ruby2.7-rubygem-simpleidn</package>
+      <package>ruby2.7-rubygem-ruby-dbus</package>
+      <package>ruby2.7-rubygem-ruby-augeas</package>
+      <package>ruby2.7-rubygem-nokogiri</package>
+      <package>ruby2.7-rubygem-gem2rpm</package>
+      <package>ruby2.7-rubygem-fast_gettext</package>
+      <package>ruby2.7-rubygem-cheetah</package>
+      <package>ruby2.7-rubygem-cfa_grub2</package>
+      <package>ruby2.7-rubygem-cfa</package>
+      <package>ruby2.7-rubygem-abstract_method</package>
+      <package>ruby2.7</package>
+      <package>ruby-solv</package>
+      <package>ruby-common</package>
+      <package>ruby</package>
+      <package>rtkit</package>
+      <package>rsync</package>
+      <package>rsvg-thumbnailer</package>
+      <package>rpm-config-SUSE</package>
+      <package>rpm</package>
+      <package>rpcbind</package>
+      <package>rp-pppoe</package>
+      <package>rofi</package>
+      <package>rgb</package>
+      <package>readline-doc</package>
+      <package>readcd</package>
+      <package>rar</package>
+      <package>quadrapassel-lang</package>
+      <package>quadrapassel</package>
+      <package>qtdeclarative-imports-provides-qt5</package>
+      <package>python38-urllib3</package>
+      <package>python38-tk</package>
+      <package>python38-slip-dbus</package>
+      <package>python38-slip</package>
+      <package>python38-six</package>
+      <package>python38-setuptools</package>
+      <package>python38-rpm</package>
+      <package>python38-requests</package>
+      <package>python38-pyudev</package>
+      <package>python38-pysmbc</package>
+      <package>python38-pyparsing</package>
+      <package>python38-pycurl</package>
+      <package>python38-pycups</package>
+      <package>python38-pycparser</package>
+      <package>python38-pycairo</package>
+      <package>python38-pyasn1</package>
+      <package>python38-pyOpenSSL</package>
+      <package>python38-py</package>
+      <package>python38-psutil</package>
+      <package>python38-ply</package>
+      <package>python38-pip</package>
+      <package>python38-packaging</package>
+      <package>python38-ordered-set</package>
+      <package>python38-notify2</package>
+      <package>python38-linux-procfs</package>
+      <package>python38-iniconfig</package>
+      <package>python38-idna</package>
+      <package>python38-gobject-cairo</package>
+      <package>python38-gobject-Gdk</package>
+      <package>python38-gobject</package>
+      <package>python38-decorator</package>
+      <package>python38-dbus-python</package>
+      <package>python38-dbm</package>
+      <package>python38-curses</package>
+      <package>python38-cryptography</package>
+      <package>python38-configobj</package>
+      <package>python38-cmdln</package>
+      <package>python38-chardet</package>
+      <package>python38-cffi</package>
+      <package>python38-certifi</package>
+      <package>python38-brotlipy</package>
+      <package>python38-base</package>
+      <package>python38-atspi</package>
+      <package>python38-asn1crypto</package>
+      <package>python38-appdirs</package>
+      <package>python38-apipkg</package>
+      <package>python38-PySocks</package>
+      <package>python38</package>
+      <package>python3-tevent</package>
+      <package>python3-tdb</package>
+      <package>python3-talloc</package>
+      <package>python3-speechd</package>
+      <package>python3-solv</package>
+      <package>python3-nftables</package>
+      <package>python3-louis</package>
+      <package>python3-ldb</package>
+      <package>python3-gedit</package>
+      <package>python3-firewall</package>
+      <package>python3-cupshelpers</package>
+      <package>python3-createrepo_c</package>
+      <package>python3-brlapi</package>
+      <package>python3-bind</package>
+      <package>python3-apparmor</package>
+      <package>python2-pycairo</package>
+      <package>python-xml</package>
+      <package>python-gtk</package>
+      <package>python-gobject2</package>
+      <package>python-base</package>
+      <package>python</package>
+      <package>purge-kernels-service</package>
+      <package>pulseaudio-utils</package>
+      <package>pulseaudio-module-zeroconf</package>
+      <package>pulseaudio-module-x11</package>
+      <package>pulseaudio-module-gsettings</package>
+      <package>pulseaudio-module-bluetooth</package>
+      <package>pulseaudio-lang</package>
+      <package>pulseaudio-gdm-hooks</package>
+      <package>pulseaudio-bash-completion</package>
+      <package>pulseaudio</package>
+      <package>publicsuffix</package>
+      <package>psutils</package>
+      <package>psmisc-lang</package>
+      <package>psmisc</package>
+      <package>procps</package>
+      <package>procmail</package>
+      <package>procinfo</package>
+      <package>prctl</package>
+      <package>pptp</package>
+      <package>ppp</package>
+      <package>powertop</package>
+      <package>postfix</package>
+      <package>poppler-tools</package>
+      <package>poppler-data</package>
+      <package>polkit-gnome-lang</package>
+      <package>polkit-gnome</package>
+      <package>polkit-default-privs</package>
+      <package>polkit</package>
+      <package>polari-lang</package>
+      <package>polari</package>
+      <package>poedit</package>
+      <package>pngquant</package>
+      <package>plymouth-theme-spinner</package>
+      <package>plymouth-theme-bgrt</package>
+      <package>plymouth-scripts</package>
+      <package>plymouth-plugin-two-step</package>
+      <package>plymouth-plugin-label</package>
+      <package>plymouth-lang</package>
+      <package>plymouth-dracut</package>
+      <package>plymouth-branding-openSUSE</package>
+      <package>plymouth</package>
+      <package>pkgconf-pkg-config</package>
+      <package>pkgconf-m4</package>
+      <package>pkgconf</package>
+      <package>pkcs11-helper</package>
+      <package>pipewire-tools</package>
+      <package>pipewire-spa-tools</package>
+      <package>pipewire-spa-plugins-0_2</package>
+      <package>pipewire-modules</package>
+      <package>pipewire-media-session</package>
+      <package>pipewire-lang</package>
+      <package>pipewire</package>
+      <package>pinentry-gnome3</package>
+      <package>pinentry</package>
+      <package>pigz</package>
+      <package>pidgin</package>
+      <package>picom</package>
+      <package>photorec</package>
+      <package>permissions-config</package>
+      <package>permissions</package>
+      <package>perl-libwww-perl</package>
+      <package>perl-gettext</package>
+      <package>perl-base</package>
+      <package>perl-XML-Twig</package>
+      <package>perl-XML-SAX-Base</package>
+      <package>perl-XML-SAX</package>
+      <package>perl-XML-Parser</package>
+      <package>perl-XML-NamespaceSupport</package>
+      <package>perl-XML-LibXML</package>
+      <package>perl-XML-Dumper</package>
+      <package>perl-X500-DN</package>
+      <package>perl-X11-Protocol</package>
+      <package>perl-WWW-RobotRules</package>
+      <package>perl-URI</package>
+      <package>perl-Try-Tiny</package>
+      <package>perl-TimeDate</package>
+      <package>perl-Term-ReadKey</package>
+      <package>perl-Sys-MemInfo</package>
+      <package>perl-SNMP</package>
+      <package>perl-Parse-RecDescent</package>
+      <package>perl-Net-SSLeay</package>
+      <package>perl-Net-HTTP</package>
+      <package>perl-Net-DBus</package>
+      <package>perl-LWP-Protocol-https</package>
+      <package>perl-LWP-MediaTypes</package>
+      <package>perl-IPC-Run3</package>
+      <package>perl-IO-Socket-SSL</package>
+      <package>perl-IO-HTML</package>
+      <package>perl-HTTP-Negotiate</package>
+      <package>perl-HTTP-Message</package>
+      <package>perl-HTTP-Date</package>
+      <package>perl-HTTP-Cookies</package>
+      <package>perl-HTML-Tagset</package>
+      <package>perl-HTML-Parser</package>
+      <package>perl-File-Listing</package>
+      <package>perl-Encode-Locale</package>
+      <package>perl-Digest-SHA1</package>
+      <package>perl-Digest-MD4</package>
+      <package>perl-Crypt-SmbHash</package>
+      <package>perl-Cpanel-JSON-XS</package>
+      <package>perl-Bootloader</package>
+      <package>perl</package>
+      <package>pentaho-reporting-flow-engine</package>
+      <package>pentaho-libxml</package>
+      <package>pdftk</package>
+      <package>pdfarranger</package>
+      <package>pcsc-lite</package>
+      <package>pciutils</package>
+      <package>parted</package>
+      <package>parallel-printer-support</package>
+      <package>paper</package>
+      <package>pam_unix</package>
+      <package>pam_pwquality</package>
+      <package>pam-doc</package>
+      <package>pam-config</package>
+      <package>pam</package>
+      <package>p7zip-full</package>
+      <package>p7zip</package>
+      <package>p11-kit-tools</package>
+      <package>p11-kit</package>
+      <package>osinfo-db</package>
+      <package>os-prober</package>
+      <package>orca-lang</package>
+      <package>orca</package>
+      <package>openvpn</package>
+      <package>opensuse-welcome-lang</package>
+      <package>opensuse-welcome</package>
+      <package>openssl-1_1</package>
+      <package>openssh-server</package>
+      <package>openssh-common</package>
+      <package>openssh-clients</package>
+      <package>openssh-askpass-gnome</package>
+      <package>openssh</package>
+      <package>openslp</package>
+      <package>openldap2-client</package>
+      <package>openjpeg2</package>
+      <package>openconnect-lang</package>
+      <package>openconnect-bash-completion</package>
+      <package>openconnect</package>
+      <package>openal-soft-data</package>
+      <package>openSUSE-release-appliance-custom</package>
+      <package>openSUSE-release</package>
+      <package>openSUSE-build-key</package>
+      <package>numlockx</package>
+      <package>numactl</package>
+      <package>ntfsprogs</package>
+      <package>ntfs-3g</package>
+      <package>nss-mdns</package>
+      <package>nscd</package>
+      <package>noto-sans-tc-regular-fonts</package>
+      <package>noto-sans-tc-fonts</package>
+      <package>noto-sans-tc-bold-fonts</package>
+      <package>noto-sans-sc-regular-fonts</package>
+      <package>noto-sans-sc-fonts</package>
+      <package>noto-sans-sc-bold-fonts</package>
+      <package>noto-sans-kr-regular-fonts</package>
+      <package>noto-sans-kr-fonts</package>
+      <package>noto-sans-kr-bold-fonts</package>
+      <package>noto-sans-jp-regular-fonts</package>
+      <package>noto-sans-jp-fonts</package>
+      <package>noto-sans-jp-bold-fonts</package>
+      <package>noto-sans-fonts</package>
+      <package>noto-sans-cjk-fonts</package>
+      <package>noto-coloremoji-fonts</package>
+      <package>notification-daemon-lang</package>
+      <package>notification-daemon</package>
+      <package>nmap</package>
+      <package>nftables</package>
+      <package>nfs-client</package>
+      <package>netpbm</package>
+      <package>netcfg</package>
+      <package>netcat-openbsd</package>
+      <package>net-snmp</package>
+      <package>ncurses-utils</package>
+      <package>nautilus-share-lang</package>
+      <package>nautilus-share</package>
+      <package>nautilus-sendto-lang</package>
+      <package>nautilus-sendto</package>
+      <package>nautilus-lang</package>
+      <package>nautilus-extension-terminal</package>
+      <package>nautilus-extension-seahorse</package>
+      <package>nautilus-evince</package>
+      <package>nautilus</package>
+      <package>nano</package>
+      <package>mysql-workbench</package>
+      <package>myspell-lightproof-en</package>
+      <package>myspell-en_US</package>
+      <package>myspell-en</package>
+      <package>myspell-el_GR</package>
+      <package>myspell-dictionaries</package>
+      <package>mutter-lang</package>
+      <package>mutter</package>
+      <package>multipath-tools</package>
+      <package>mpt-status</package>
+      <package>mpg123-openal</package>
+      <package>mozilla-nss-certs</package>
+      <package>mozilla-nss</package>
+      <package>mozilla-nspr</package>
+      <package>mousetweaks-lang</package>
+      <package>mousetweaks</package>
+      <package>mobile-broadband-provider-info</package>
+      <package>mkisofs</package>
+      <package>mkfontscale</package>
+      <package>mjpegtools</package>
+      <package>mgopen-fonts</package>
+      <package>metatheme-adwaita-common</package>
+      <package>metamail</package>
+      <package>menulibre</package>
+      <package>meld</package>
+      <package>megatools</package>
+      <package>mdadm</package>
+      <package>mcelog</package>
+      <package>mc</package>
+      <package>mbimcli-bash-completion</package>
+      <package>man-pages-posix</package>
+      <package>man-pages</package>
+      <package>man</package>
+      <package>malcontent-lang</package>
+      <package>malcontent-control</package>
+      <package>malcontent</package>
+      <package>make</package>
+      <package>maim</package>
+      <package>mailx</package>
+      <package>macchanger</package>
+      <package>lxappearance</package>
+      <package>luit</package>
+      <package>lsscsi</package>
+      <package>lsof</package>
+      <package>lsb-release</package>
+      <package>logrotate</package>
+      <package>login_defs</package>
+      <package>lockdev</package>
+      <package>live-usb-gui</package>
+      <package>live-grub-stick</package>
+      <package>live-fat-stick</package>
+      <package>lightsoff-lang</package>
+      <package>lightsoff</package>
+      <package>lifecycle-data-openSUSE</package>
+      <package>libzypp-plugin-appdata</package>
+      <package>libzypp</package>
+      <package>libzvbi0</package>
+      <package>libzstd1</package>
+      <package>libzmq5</package>
+      <package>libzmf-0_0-0</package>
+      <package>libzio1</package>
+      <package>libzimg2</package>
+      <package>libzck1</package>
+      <package>libzbar0</package>
+      <package>libzapojit-0_0-0</package>
+      <package>libz1</package>
+      <package>libyui15</package>
+      <package>libyui-qt15</package>
+      <package>libyui-qt-pkg15</package>
+      <package>libyui-qt-graph15</package>
+      <package>libyui-ncurses15</package>
+      <package>libyui-ncurses-pkg15</package>
+      <package>libyelp0</package>
+      <package>libyaml-cpp0_6</package>
+      <package>libyaml-0-2</package>
+      <package>libyajl2</package>
+      <package>libxxhash0</package>
+      <package>libxtables12</package>
+      <package>libxslt1</package>
+      <package>libxslt-tools</package>
+      <package>libxshmfence1</package>
+      <package>libxmlsec1-nss1</package>
+      <package>libxmlsec1-1</package>
+      <package>libxmlb2</package>
+      <package>libxml2-tools</package>
+      <package>libxml2-2</package>
+      <package>libxklavier16</package>
+      <package>libxkbregistry0</package>
+      <package>libxkbfile1</package>
+      <package>libxkbcommon0</package>
+      <package>libxkbcommon-x11-0</package>
+      <package>libxcb1</package>
+      <package>libxcb-xv0</package>
+      <package>libxcb-xkb1</package>
+      <package>libxcb-xinput0</package>
+      <package>libxcb-xinerama0</package>
+      <package>libxcb-xfixes0</package>
+      <package>libxcb-util1</package>
+      <package>libxcb-sync1</package>
+      <package>libxcb-shm0</package>
+      <package>libxcb-shape0</package>
+      <package>libxcb-res0</package>
+      <package>libxcb-render0</package>
+      <package>libxcb-render-util0</package>
+      <package>libxcb-randr0</package>
+      <package>libxcb-present0</package>
+      <package>libxcb-keysyms1</package>
+      <package>libxcb-image0</package>
+      <package>libxcb-icccm4</package>
+      <package>libxcb-glx0</package>
+      <package>libxcb-dri3-0</package>
+      <package>libxcb-dri2-0</package>
+      <package>libx86emu3</package>
+      <package>libwrap0</package>
+      <package>libwps-0_4-4</package>
+      <package>libwpg-0_3-3</package>
+      <package>libwpe-1_0-1</package>
+      <package>libwpd-0_10-10</package>
+      <package>libwoff2dec1_0_2</package>
+      <package>libwoff2common1_0_2</package>
+      <package>libwnck-lang</package>
+      <package>libwnck-3-0</package>
+      <package>libwmf-0_2-7</package>
+      <package>libwinpr2</package>
+      <package>libwebrtc_audio_processing1</package>
+      <package>libwebpmux3</package>
+      <package>libwebpdemux2</package>
+      <package>libwebp7</package>
+      <package>libwebkit2gtk3-lang</package>
+      <package>libwebkit2gtk-4_0-37</package>
+      <package>libwbclient0</package>
+      <package>libwayland-server0</package>
+      <package>libwayland-egl1</package>
+      <package>libwayland-cursor0</package>
+      <package>libwayland-client0</package>
+      <package>libwavpack1</package>
+      <package>libwacom2</package>
+      <package>libwacom-data</package>
+      <package>libvulkan1</package>
+      <package>libvte-2_91-0</package>
+      <package>libvpx6</package>
+      <package>libvorbisfile3</package>
+      <package>libvorbisenc2</package>
+      <package>libvorbis0</package>
+      <package>libvncserver1</package>
+      <package>libvmaf1</package>
+      <package>libvisual</package>
+      <package>libvisio-0_1-1</package>
+      <package>libvidstab1_1</package>
+      <package>libverto1</package>
+      <package>libvdpau1</package>
+      <package>libva2</package>
+      <package>libva-x11-2</package>
+      <package>libva-glx2</package>
+      <package>libva-drm2</package>
+      <package>libv4lconvert0</package>
+      <package>libv4l2-0</package>
+      <package>libv4l1-0</package>
+      <package>libv4l</package>
+      <package>libuv1</package>
+      <package>libuuid1</package>
+      <package>libutempter0</package>
+      <package>libusbredirparser1</package>
+      <package>libusbredirhost1</package>
+      <package>libusbmuxd-2_0-6</package>
+      <package>libusb-1_0-0</package>
+      <package>liburing2</package>
+      <package>liburcu6</package>
+      <package>libupower-glib3</package>
+      <package>libunwind</package>
+      <package>libunistring2</package>
+      <package>libumfpack5</package>
+      <package>libudisks2-0_btrfs</package>
+      <package>libudisks2-0</package>
+      <package>libudev1</package>
+      <package>libubsan1</package>
+      <package>libtwolame0</package>
+      <package>libtss2-sys1</package>
+      <package>libtss2-rc0</package>
+      <package>libtss2-mu0</package>
+      <package>libtss2-esys0</package>
+      <package>libts0</package>
+      <package>libtracker-sparql-3_0-0</package>
+      <package>libtracker-sparql-2_0-0</package>
+      <package>libtracker-miner-2_0-0</package>
+      <package>libtracker-control-2_0-0</package>
+      <package>libtracker-common-2_0</package>
+      <package>libtotem-plparser18</package>
+      <package>libtotem-plparser-mini18</package>
+      <package>libtommath1</package>
+      <package>libtomcrypt1</package>
+      <package>libtirpc3</package>
+      <package>libtirpc-netconfig</package>
+      <package>libtiff5</package>
+      <package>libtheoraenc1</package>
+      <package>libtheoradec1</package>
+      <package>libthai0</package>
+      <package>libthai-data</package>
+      <package>libtextstyle0</package>
+      <package>libtevent0</package>
+      <package>libtevent-util0</package>
+      <package>libtepl-6-0</package>
+      <package>libtelepathy-logger3</package>
+      <package>libtelepathy-glib0</package>
+      <package>libteamdctl0</package>
+      <package>libtdb1</package>
+      <package>libtasn1-6</package>
+      <package>libtalloc2</package>
+      <package>libtag1</package>
+      <package>libsystemd0</package>
+      <package>libsynctex2</package>
+      <package>libswscale5_9</package>
+      <package>libswresample3_9</package>
+      <package>libsuitesparseconfig5</package>
+      <package>libstorage-ng1</package>
+      <package>libstorage-ng-ruby</package>
+      <package>libstorage-ng-lang</package>
+      <package>libstoken1</package>
+      <package>libstdc++6</package>
+      <package>libstartup-notification-1-0</package>
+      <package>libstaroffice-0_0-0</package>
+      <package>libssh4</package>
+      <package>libssh-config</package>
+      <package>libsrtp2-1</package>
+      <package>libsrt1_4</package>
+      <package>libsratom-0-0</package>
+      <package>libsqlite3-0</package>
+      <package>libspice-client-gtk-3_0-5</package>
+      <package>libspice-client-glib-helper</package>
+      <package>libspice-client-glib-2_0-8</package>
+      <package>libspeexdsp1</package>
+      <package>libspeex1</package>
+      <package>libspeechd2</package>
+      <package>libspandsp2</package>
+      <package>libsoxr0</package>
+      <package>libsoup-lang</package>
+      <package>libsoup-2_4-1</package>
+      <package>libsord-0-0</package>
+      <package>libsolv-tools</package>
+      <package>libsoftokn3-hmac</package>
+      <package>libsoftokn3</package>
+      <package>libsodium23</package>
+      <package>libsnmp30</package>
+      <package>libsndfile1</package>
+      <package>libsnappy1</package>
+      <package>libsmputils1-1</package>
+      <package>libsmbldap2</package>
+      <package>libsmbios_c2</package>
+      <package>libsmbconf0</package>
+      <package>libsmbclient0</package>
+      <package>libsmartcols1</package>
+      <package>libslp1</package>
+      <package>libslang2</package>
+      <package>libsigc-2_0-0</package>
+      <package>libsgutils2-1_46-2</package>
+      <package>libserializer</package>
+      <package>libserf-1-1</package>
+      <package>libserd-0-0</package>
+      <package>libsepol2</package>
+      <package>libsensors4</package>
+      <package>libsemanage2</package>
+      <package>libsemanage-conf</package>
+      <package>libselinux1</package>
+      <package>libsecret-lang</package>
+      <package>libsecret-1-0</package>
+      <package>libseccomp2</package>
+      <package>libschily2_0</package>
+      <package>libscgcmd1_0</package>
+      <package>libscg1_0</package>
+      <package>libsbc1</package>
+      <package>libsasl2-3</package>
+      <package>libsane1</package>
+      <package>libsamplerate0</package>
+      <package>libsamdb0</package>
+      <package>libsamba-util0</package>
+      <package>libsamba-policy0-python3</package>
+      <package>libsamba-passdb0</package>
+      <package>libsamba-hostconfig0</package>
+      <package>libsamba-errors0</package>
+      <package>libsamba-credentials1</package>
+      <package>libruby2_7-2_7</package>
+      <package>librubberband2</package>
+      <package>librsvg-2-2</package>
+      <package>librscg1_0</package>
+      <package>librpmbuild9</package>
+      <package>librmt1_0</package>
+      <package>librevenge-stream-0_0-0</package>
+      <package>librevenge-0_0-0</package>
+      <package>librest-0_7-0</package>
+      <package>librepository</package>
+      <package>libreofficekit</package>
+      <package>libreoffice-writer</package>
+      <package>libreoffice-share-linker</package>
+      <package>libreoffice-pyuno</package>
+      <package>libreoffice-math</package>
+      <package>libreoffice-mailmerge</package>
+      <package>libreoffice-l10n-en</package>
+      <package>libreoffice-l10n-el</package>
+      <package>libreoffice-impress</package>
+      <package>libreoffice-icon-themes</package>
+      <package>libreoffice-gtk3</package>
+      <package>libreoffice-gnome</package>
+      <package>libreoffice-filters-optional</package>
+      <package>libreoffice-draw</package>
+      <package>libreoffice-calc</package>
+      <package>libreoffice-branding-openSUSE</package>
+      <package>libreoffice-base</package>
+      <package>libreoffice</package>
+      <package>libreadline8</package>
+      <package>libre2-9</package>
+      <package>librdf0</package>
+      <package>libraw20</package>
+      <package>libraw1394-11</package>
+      <package>librav1e0</package>
+      <package>librasqal3</package>
+      <package>libraptor2-0</package>
+      <package>libqxp-0_0-0</package>
+      <package>libquicktime0</package>
+      <package>libquadmath0</package>
+      <package>libqt5-qtxmlpatterns-imports</package>
+      <package>libqt5-qtwebengine</package>
+      <package>libqt5-qttranslations</package>
+      <package>libqt5-qtstyleplugins-platformtheme-gtk2</package>
+      <package>libqt5-qtquickcontrols2</package>
+      <package>libqt5-qtquickcontrols</package>
+      <package>libqt5-qtgraphicaleffects</package>
+      <package>libqt5-qtbase-platformtheme-gtk3</package>
+      <package>libqrcodegencpp1</package>
+      <package>libqqwing2</package>
+      <package>libqpdf28</package>
+      <package>libqmi-tools</package>
+      <package>libqmi-glib5</package>
+      <package>libpython3_8-1_0</package>
+      <package>libpython2_7-1_0</package>
+      <package>libpwquality1</package>
+      <package>libpurple-tcl</package>
+      <package>libpurple-lang</package>
+      <package>libpurple-branding-openSUSE</package>
+      <package>libpurple</package>
+      <package>libpulse0</package>
+      <package>libpulse-mainloop-glib0</package>
+      <package>libpsl5</package>
+      <package>libpskc0</package>
+      <package>libproxy1-pacrunner-webkit</package>
+      <package>libproxy1-networkmanager</package>
+      <package>libproxy1-config-gnome3</package>
+      <package>libproxy1</package>
+      <package>libprotobuf28</package>
+      <package>libprotobuf-lite28</package>
+      <package>libprotobuf-c1</package>
+      <package>libprocps8</package>
+      <package>libpostproc55_9</package>
+      <package>libportaudio2</package>
+      <package>libportal0</package>
+      <package>libpopt0</package>
+      <package>libpoppler112</package>
+      <package>libpoppler-glib8</package>
+      <package>libpoppler-cpp0</package>
+      <package>libpolkit0</package>
+      <package>libpng16-16</package>
+      <package>libply5</package>
+      <package>libply-splash-graphics5</package>
+      <package>libply-splash-core5</package>
+      <package>libply-boot-client5</package>
+      <package>libplist-2_0-3</package>
+      <package>libpkgconf3</package>
+      <package>libpkcs11-helper1</package>
+      <package>libpixman-1-0</package>
+      <package>libpipewire-0_3-0</package>
+      <package>libpipeline1</package>
+      <package>libphonenumber8</package>
+      <package>libphodav-2_0-0</package>
+      <package>libpgm-5_2-0</package>
+      <package>libpeas-loader-python3</package>
+      <package>libpeas-lang</package>
+      <package>libpeas-gtk-1_0-0</package>
+      <package>libpeas-1_0-0</package>
+      <package>libpcsclite1</package>
+      <package>libpcre2-8-0</package>
+      <package>libpcre2-32-0</package>
+      <package>libpcre2-16-0</package>
+      <package>libpcre1</package>
+      <package>libpciaccess0</package>
+      <package>libpci3</package>
+      <package>libpcaudio0</package>
+      <package>libpcap1</package>
+      <package>libparted0</package>
+      <package>libparanoia1_0</package>
+      <package>libpangomm-1_4-1</package>
+      <package>libpango-1_0-0</package>
+      <package>libpagemaker-0_0-0</package>
+      <package>libpackagekit-glib2-18</package>
+      <package>libp11-kit0</package>
+      <package>libostree-1-1</package>
+      <package>libostree</package>
+      <package>libosinfo-1_0-0</package>
+      <package>libosinfo</package>
+      <package>liborcus-0_16-0</package>
+      <package>liborc-0_4-0</package>
+      <package>libopus0</package>
+      <package>libopenssl1_1</package>
+      <package>libopenmpt0</package>
+      <package>libopenjp2-7</package>
+      <package>libopenconnect5</package>
+      <package>libopenblas_pthreads0</package>
+      <package>libopenal1</package>
+      <package>liboggkate1</package>
+      <package>libogg0</package>
+      <package>libofa0</package>
+      <package>libodfgen-0_1-1</package>
+      <package>libobjc4</package>
+      <package>liboauth0</package>
+      <package>libnumbertext-data</package>
+      <package>libnumbertext-1_0-0</package>
+      <package>libnuma1</package>
+      <package>libntfs-3g88</package>
+      <package>libnss_usrfiles2</package>
+      <package>libnsl3</package>
+      <package>libnscd1</package>
+      <package>libnpth0</package>
+      <package>libnotify4</package>
+      <package>libnma0</package>
+      <package>libnma-lang</package>
+      <package>libnm0</package>
+      <package>libnl3-200</package>
+      <package>libnl-config</package>
+      <package>libnice10</package>
+      <package>libnghttp2-14</package>
+      <package>libnftnl11</package>
+      <package>libnftables1</package>
+      <package>libnfsidmap1</package>
+      <package>libnfs13</package>
+      <package>libnfnetlink0</package>
+      <package>libnewt0_52</package>
+      <package>libnettle8</package>
+      <package>libnetpbm11</package>
+      <package>libnetfilter_conntrack3</package>
+      <package>libnetapi0</package>
+      <package>libneon27</package>
+      <package>libndr1</package>
+      <package>libndr-standard0</package>
+      <package>libndr-nbt0</package>
+      <package>libndr-krb5pac0</package>
+      <package>libndp0</package>
+      <package>libncurses6</package>
+      <package>libnautilus-extension1</package>
+      <package>libmythes-1_2-0</package>
+      <package>libmysofa1</package>
+      <package>libmypaint-lang</package>
+      <package>libmypaint-1_6-1</package>
+      <package>libmwaw-0_3-3</package>
+      <package>libmusicbrainz5-1</package>
+      <package>libmtp9</package>
+      <package>libmtp-udev</package>
+      <package>libmtdev1</package>
+      <package>libmspub-0_1-1</package>
+      <package>libmspack0</package>
+      <package>libmplex2-2_2-0</package>
+      <package>libmpg123-0</package>
+      <package>libmpfr6</package>
+      <package>libmpeg2encpp-2_2-0</package>
+      <package>libmpeg2-0</package>
+      <package>libmpcdec6</package>
+      <package>libmpc3</package>
+      <package>libmpath0</package>
+      <package>libmp3lame0</package>
+      <package>libmozjs-78-0</package>
+      <package>libmount1</package>
+      <package>libmodulemd2</package>
+      <package>libmnl0</package>
+      <package>libmng2</package>
+      <package>libmms0</package>
+      <package>libmm-glib0</package>
+      <package>libmjpegutils-2_2-0</package>
+      <package>libmission-control-plugins0</package>
+      <package>libminizip1</package>
+      <package>libminiupnpc17</package>
+      <package>libmfx1</package>
+      <package>libmetis5</package>
+      <package>libmetalink3</package>
+      <package>libmediacheck5</package>
+      <package>libmediaart-2_0-0</package>
+      <package>libmbim-glib4</package>
+      <package>libmbim</package>
+      <package>libmariadb3</package>
+      <package>libmanette-0_2-0</package>
+      <package>libmalcontent-ui-0-0</package>
+      <package>libmalcontent-0-0</package>
+      <package>libmagic1</package>
+      <package>libmad0</package>
+      <package>liblzo2-2</package>
+      <package>liblzma5</package>
+      <package>liblz4-1</package>
+      <package>libluajit-5_1-2</package>
+      <package>liblua5_4-5</package>
+      <package>libltdl7</package>
+      <package>liblrdf2</package>
+      <package>liblqr-1-0</package>
+      <package>liblpsolve55-0</package>
+      <package>liblouis20</package>
+      <package>liblouis-data</package>
+      <package>liblockdev1</package>
+      <package>libloader</package>
+      <package>liblmdb-0_9_29</package>
+      <package>liblilv-0-0</package>
+      <package>liblensfun1</package>
+      <package>libldb2</package>
+      <package>libldapcpp1</package>
+      <package>libldap-data</package>
+      <package>libldap-2_4-2</package>
+      <package>libldac2</package>
+      <package>liblcms2-2</package>
+      <package>liblayout</package>
+      <package>liblavrec-2_2-0</package>
+      <package>liblavplay-2_2-0</package>
+      <package>liblavjpeg-2_2-0</package>
+      <package>liblavfile-2_2-0</package>
+      <package>liblapack3</package>
+      <package>liblangtag1</package>
+      <package>libksba8</package>
+      <package>libkmod2</package>
+      <package>libkeyutils1</package>
+      <package>libkate1</package>
+      <package>libjte2</package>
+      <package>libjson-glib-1_0-0</package>
+      <package>libjson-c5</package>
+      <package>libjpeg8</package>
+      <package>libjcat1</package>
+      <package>libjbig2</package>
+      <package>libjavascriptcoregtk-4_0-18</package>
+      <package>libjansson4</package>
+      <package>libjack0</package>
+      <package>libixion-0_16-0</package>
+      <package>libiw30</package>
+      <package>libisofs6</package>
+      <package>libisoburn1</package>
+      <package>libisl23</package>
+      <package>libiptcdata0</package>
+      <package>libiptcdata</package>
+      <package>libipset13</package>
+      <package>libip6tc2</package>
+      <package>libip4tc2</package>
+      <package>libinput10</package>
+      <package>libinput-udev</package>
+      <package>libinih0</package>
+      <package>libindicator3-7</package>
+      <package>libimobiledevice-1_0-6</package>
+      <package>libimagequant0</package>
+      <package>libidn2-0</package>
+      <package>libidn12</package>
+      <package>libid3tag0</package>
+      <package>libicu69-ledata</package>
+      <package>libicu69</package>
+      <package>libical3</package>
+      <package>libical-glib3</package>
+      <package>libibus-1_0-5</package>
+      <package>libhyphen0</package>
+      <package>libhunspell-1_7-0</package>
+      <package>libhogweed6</package>
+      <package>libhidapi-hidraw0</package>
+      <package>libheif1</package>
+      <package>libhavege2</package>
+      <package>libharfbuzz0</package>
+      <package>libharfbuzz-subset0</package>
+      <package>libharfbuzz-icu0</package>
+      <package>libharfbuzz-gobject0</package>
+      <package>libhandy-1-0</package>
+      <package>libgxps2</package>
+      <package>libgweather-lang</package>
+      <package>libgweather-3-16</package>
+      <package>libgvnc-1_0-0</package>
+      <package>libgusb2</package>
+      <package>libgupnp-igd-1_0-4</package>
+      <package>libgupnp-dlna-backend-gstreamer</package>
+      <package>libgupnp-dlna-2_0-3</package>
+      <package>libgupnp-av-1_0-2</package>
+      <package>libgupnp-1_2-0</package>
+      <package>libgudev-1_0-0</package>
+      <package>libgts-0_7-5</package>
+      <package>libgtop-lang</package>
+      <package>libgtop-2_0-11</package>
+      <package>libgtop</package>
+      <package>libgtkspell0</package>
+      <package>libgtksourceview-4-0</package>
+      <package>libgtkmm-3_0-1</package>
+      <package>libgtk-vnc-2_0-0</package>
+      <package>libgtk-4-1</package>
+      <package>libgtk-3-0</package>
+      <package>libgtk-2_0-0</package>
+      <package>libgthread-2_0-0</package>
+      <package>libgstwebrtc-1_0-0</package>
+      <package>libgstwayland-1_0-0</package>
+      <package>libgstvulkan-1_0-0</package>
+      <package>libgstvideo-1_0-0</package>
+      <package>libgsturidownloader-1_0-0</package>
+      <package>libgsttag-1_0-0</package>
+      <package>libgstsdp-1_0-0</package>
+      <package>libgstsctp-1_0-0</package>
+      <package>libgstrtsp-1_0-0</package>
+      <package>libgstrtp-1_0-0</package>
+      <package>libgstriff-1_0-0</package>
+      <package>libgstreamer-1_0-0</package>
+      <package>libgstplayer-1_0-0</package>
+      <package>libgstphotography-1_0-0</package>
+      <package>libgstpbutils-1_0-0</package>
+      <package>libgstmpegts-1_0-0</package>
+      <package>libgstisoff-1_0-0</package>
+      <package>libgstgl-1_0-0</package>
+      <package>libgstfft-1_0-0</package>
+      <package>libgstcodecs-1_0-0</package>
+      <package>libgstcodecparsers-1_0-0</package>
+      <package>libgstbasecamerabinsrc-1_0-0</package>
+      <package>libgstbadaudio-1_0-0</package>
+      <package>libgstaudio-1_0-0</package>
+      <package>libgstapp-1_0-0</package>
+      <package>libgstallocators-1_0-0</package>
+      <package>libgstadaptivedemux-1_0-0</package>
+      <package>libgssdp-1_2-0</package>
+      <package>libgspell-1-2</package>
+      <package>libgsound0</package>
+      <package>libgsm1</package>
+      <package>libgsf-lang</package>
+      <package>libgsf-1-114</package>
+      <package>libgrlpls-0_3-0</package>
+      <package>libgrlnet-0_3-0</package>
+      <package>libgrilo-0_3-0</package>
+      <package>libgraphviz6</package>
+      <package>libgraphite2-3</package>
+      <package>libgraphene-1_0-0</package>
+      <package>libgpm2</package>
+      <package>libgphoto2-6</package>
+      <package>libgpgmepp6</package>
+      <package>libgpgme11</package>
+      <package>libgpg-error0</package>
+      <package>libgomp1</package>
+      <package>libgom-1_0-0</package>
+      <package>libgobject-2_0-0</package>
+      <package>libgoa-backend-1_0-1</package>
+      <package>libgoa-1_0-0</package>
+      <package>libgnutls30</package>
+      <package>libgnustep-base1_27</package>
+      <package>libgnomesu0</package>
+      <package>libgnomesu-lang</package>
+      <package>libgnomesu</package>
+      <package>libgnomekbd8</package>
+      <package>libgnomekbd-lang</package>
+      <package>libgnome-menu-3-0</package>
+      <package>libgnome-keyring0</package>
+      <package>libgnome-keyring-lang</package>
+      <package>libgnome-games-support-lang</package>
+      <package>libgnome-games-support-1-3</package>
+      <package>libgnome-desktop-3_0-common</package>
+      <package>libgnome-desktop-3-19</package>
+      <package>libgnome-bluetooth13</package>
+      <package>libgnome-autoar-gtk-0-0</package>
+      <package>libgnome-autoar-0-0</package>
+      <package>libgmp10</package>
+      <package>libgmodule-2_0-0</package>
+      <package>libgme0</package>
+      <package>libglvnd</package>
+      <package>libglibmm-2_4-1</package>
+      <package>libglib-2_0-0</package>
+      <package>libglade-2_0-0</package>
+      <package>libgjs0</package>
+      <package>libgirepository-1_0-1</package>
+      <package>libgiomm-2_4-1</package>
+      <package>libgio-2_0-0</package>
+      <package>libgimpui-2_0-0</package>
+      <package>libgimp-2_0-0</package>
+      <package>libgif7</package>
+      <package>libgfortran5</package>
+      <package>libgfbgraph-0_2-0</package>
+      <package>libgexiv2-2</package>
+      <package>libgeocode-glib0</package>
+      <package>libgegl-0_4-0</package>
+      <package>libgee-0_8-2</package>
+      <package>libgdm1</package>
+      <package>libgdk_pixbuf_xlib-2_0-0</package>
+      <package>libgdk_pixbuf-2_0-0</package>
+      <package>libgdbm_compat4</package>
+      <package>libgdbm6</package>
+      <package>libgdata22</package>
+      <package>libgdata-lang</package>
+      <package>libgd3</package>
+      <package>libgcrypt20</package>
+      <package>libgcr-3-1</package>
+      <package>libgck-modules-gnome-keyring</package>
+      <package>libgck-1-0</package>
+      <package>libgcc_s1</package>
+      <package>libgcab-1_0-0</package>
+      <package>libgbm1</package>
+      <package>libgadu3</package>
+      <package>libfwupdplugin1</package>
+      <package>libfwupd2</package>
+      <package>libfuse3-3</package>
+      <package>libfuse2</package>
+      <package>libfribidi0</package>
+      <package>libfreetype6</package>
+      <package>libfreerdp2</package>
+      <package>libfreehand-0_1-1</package>
+      <package>libfreebl3-hmac</package>
+      <package>libfreebl3</package>
+      <package>libformula</package>
+      <package>libfonts</package>
+      <package>libfontenc1</package>
+      <package>libfontconfig1</package>
+      <package>libfolks25</package>
+      <package>libfolks-eds25</package>
+      <package>libfltk1</package>
+      <package>libflatpak0</package>
+      <package>libfind4_0</package>
+      <package>libfile1_0</package>
+      <package>libfido2-udev</package>
+      <package>libfido2-1</package>
+      <package>libfftw3-3</package>
+      <package>libffi8</package>
+      <package>libfdisk1</package>
+      <package>libfarstream-0_2-5</package>
+      <package>libfam0-gamin</package>
+      <package>libexttextcat-2_0-0</package>
+      <package>libexttextcat</package>
+      <package>libext2fs2</package>
+      <package>libexpat1</package>
+      <package>libexiv2-27</package>
+      <package>libexif12</package>
+      <package>libexempi8</package>
+      <package>libevview3-3</package>
+      <package>libevent-2_1-7</package>
+      <package>libevdocument3-4</package>
+      <package>libevdev2</package>
+      <package>libetonyek-0_1-1</package>
+      <package>libespeak-ng1</package>
+      <package>libesmtp6</package>
+      <package>liberation-fonts</package>
+      <package>libepubgen-0_1-1</package>
+      <package>libepoxy0</package>
+      <package>libeot0</package>
+      <package>libenchant1</package>
+      <package>libenchant-2-2</package>
+      <package>libell0</package>
+      <package>libelf1</package>
+      <package>libefivar1</package>
+      <package>libedit0</package>
+      <package>libedc_ecc_dec1_0</package>
+      <package>libedc_ecc1_0</package>
+      <package>libedataserverui-1_2-3</package>
+      <package>libedataserver-1_2-26</package>
+      <package>libedata-cal-2_0-1</package>
+      <package>libedata-book-1_2-26</package>
+      <package>libeconf0</package>
+      <package>libecal-2_0-1</package>
+      <package>libebtc0</package>
+      <package>libebook-contacts-1_2-3</package>
+      <package>libebook-1_2-20</package>
+      <package>libebackend-1_2-10</package>
+      <package>libe-book-0_1-1</package>
+      <package>libdw1</package>
+      <package>libdvdread8</package>
+      <package>libdvdcss2</package>
+      <package>libdv4</package>
+      <package>libdrm_radeon1</package>
+      <package>libdrm_nouveau2</package>
+      <package>libdrm_intel1</package>
+      <package>libdrm_amdgpu1</package>
+      <package>libdrm2</package>
+      <package>libdouble-conversion3</package>
+      <package>libdotconf0</package>
+      <package>libdmx1</package>
+      <package>libdmapsharing-4_0-3</package>
+      <package>libdleyna-core-1_0-5</package>
+      <package>libdialog15</package>
+      <package>libdevmapper1_03</package>
+      <package>libdevmapper-event1_03</package>
+      <package>libdeflt1_0</package>
+      <package>libdconf1</package>
+      <package>libdcerpc0</package>
+      <package>libdcerpc-binding0</package>
+      <package>libdc1394-25</package>
+      <package>libdbusmenu-gtk3-4</package>
+      <package>libdbusmenu-glib4</package>
+      <package>libdbus-1-3</package>
+      <package>libdb-4_8</package>
+      <package>libdazzle-1_0-0</package>
+      <package>libdav1d5</package>
+      <package>libdatrie1</package>
+      <package>libdaemon0</package>
+      <package>libcurl4</package>
+      <package>libcupsimage2</package>
+      <package>libcups2</package>
+      <package>libcue2</package>
+      <package>libcryptui0</package>
+      <package>libcryptui-lang</package>
+      <package>libcryptui-data</package>
+      <package>libcryptsetup12</package>
+      <package>libcrypt1</package>
+      <package>libcreaterepo_c0</package>
+      <package>libcrack2</package>
+      <package>libcpupower0</package>
+      <package>libcom_err2</package>
+      <package>libcolorhug2</package>
+      <package>libcolord2</package>
+      <package>libcolord-gtk1</package>
+      <package>libcolamd2</package>
+      <package>libcogl20</package>
+      <package>libcogl-pango20</package>
+      <package>libcodec2-1_0</package>
+      <package>libcmis-0_5-5</package>
+      <package>libclutter-gtk-1_0-0</package>
+      <package>libclutter-gst-3_0-0</package>
+      <package>libclutter-1_0-0</package>
+      <package>libclucene-shared1</package>
+      <package>libclucene-core1</package>
+      <package>libclucene-contribs-lib1</package>
+      <package>libcloudproviders0</package>
+      <package>libcholmod3</package>
+      <package>libcheese8</package>
+      <package>libcheese-gtk25</package>
+      <package>libcheese-common</package>
+      <package>libchamplain-0_12-0</package>
+      <package>libcelt0-2</package>
+      <package>libcdrdeflt1_0</package>
+      <package>libcdr-0_1-1</package>
+      <package>libcdio_paranoia2</package>
+      <package>libcdio_cdda2</package>
+      <package>libcdio19</package>
+      <package>libcdda_paranoia0</package>
+      <package>libcdda_interface0</package>
+      <package>libccolamd2</package>
+      <package>libcbor0_8</package>
+      <package>libcares2</package>
+      <package>libcap2</package>
+      <package>libcap-ng0</package>
+      <package>libcanberra0</package>
+      <package>libcanberra-gtk3-module</package>
+      <package>libcanberra-gtk3-0</package>
+      <package>libcanberra-gtk2-module</package>
+      <package>libcanberra-gtk0</package>
+      <package>libcanberra-gtk-module-common</package>
+      <package>libcamera-suse5</package>
+      <package>libcamel-1_2-62</package>
+      <package>libcamd2</package>
+      <package>libcairomm-1_0-1</package>
+      <package>libcairo2</package>
+      <package>libcairo-script-interpreter2</package>
+      <package>libcairo-gobject2</package>
+      <package>libcacard0</package>
+      <package>libbz2-1</package>
+      <package>libbytesize1</package>
+      <package>libburn4</package>
+      <package>libbsd0</package>
+      <package>libbs2b0</package>
+      <package>libbrotlienc1</package>
+      <package>libbrotlidec1</package>
+      <package>libbrotlicommon1</package>
+      <package>libbrlapi0_8</package>
+      <package>libbrasero-utils3-1</package>
+      <package>libbrasero-media3-1</package>
+      <package>libbrasero-burn3-1</package>
+      <package>libbox2d2</package>
+      <package>libboost_thread1_76_0</package>
+      <package>libboost_locale1_76_0</package>
+      <package>libboost_iostreams1_76_0</package>
+      <package>libboost_filesystem1_76_0</package>
+      <package>libboost_date_time1_76_0</package>
+      <package>libbluray2</package>
+      <package>libbluetooth3</package>
+      <package>libblogger2</package>
+      <package>libblockdev2</package>
+      <package>libblockdev</package>
+      <package>libblkid1</package>
+      <package>libblas3</package>
+      <package>libbd_utils2</package>
+      <package>libbd_swap2</package>
+      <package>libbd_part2</package>
+      <package>libbd_mdraid2</package>
+      <package>libbd_loop2</package>
+      <package>libbd_fs2</package>
+      <package>libbd_crypto2</package>
+      <package>libbd_btrfs2</package>
+      <package>libbase</package>
+      <package>libbabl-0_1-0</package>
+      <package>libavutil56_70</package>
+      <package>libavtp0</package>
+      <package>libavresample4_0</package>
+      <package>libavif12</package>
+      <package>libavformat58_76</package>
+      <package>libavfilter7_110</package>
+      <package>libavcodec58_134</package>
+      <package>libavahi-ui-gtk3-0</package>
+      <package>libavahi-gobject0</package>
+      <package>libavahi-glib1</package>
+      <package>libavahi-core7</package>
+      <package>libavahi-common3</package>
+      <package>libavahi-client3</package>
+      <package>libauparse0</package>
+      <package>libaugeas0</package>
+      <package>libaudit1</package>
+      <package>libattr1</package>
+      <package>libatspi0</package>
+      <package>libatopology2</package>
+      <package>libatm1</package>
+      <package>libatkmm-1_6-1</package>
+      <package>libatk-bridge-2_0-0</package>
+      <package>libatk-1_0-0</package>
+      <package>libatasmart4</package>
+      <package>libatasmart-utils</package>
+      <package>libassuan0</package>
+      <package>libass9</package>
+      <package>libasound2</package>
+      <package>libasm1</package>
+      <package>libargon2-1</package>
+      <package>libarchive13</package>
+      <package>libapr1</package>
+      <package>libapr-util1</package>
+      <package>libappstream4</package>
+      <package>libappstream-glib8</package>
+      <package>libappindicator3-1</package>
+      <package>libapparmor1</package>
+      <package>libaom3</package>
+      <package>libao4</package>
+      <package>libao-plugins4</package>
+      <package>libamtk-5-0</package>
+      <package>libamd2</package>
+      <package>libalternatives1</package>
+      <package>libaio1</package>
+      <package>libadwaitaqt1</package>
+      <package>libacl1</package>
+      <package>libaccountsservice0</package>
+      <package>libabw-0_1-1</package>
+      <package>liba52-0</package>
+      <package>libZXing1</package>
+      <package>libXxf86vm1</package>
+      <package>libXvnc1</package>
+      <package>libXv1</package>
+      <package>libXtst6</package>
+      <package>libXt6</package>
+      <package>libXss1</package>
+      <package>libXrender1</package>
+      <package>libXrandr2</package>
+      <package>libXpm4</package>
+      <package>libXmuu1</package>
+      <package>libXmu6</package>
+      <package>libXinerama1</package>
+      <package>libXi6</package>
+      <package>libXft2</package>
+      <package>libXfontcache1</package>
+      <package>libXfont2-2</package>
+      <package>libXfixes3</package>
+      <package>libXext6</package>
+      <package>libXdmcp6</package>
+      <package>libXdamage1</package>
+      <package>libXcursor1</package>
+      <package>libXcomposite1</package>
+      <package>libXaw7</package>
+      <package>libXau6</package>
+      <package>libXRes1</package>
+      <package>libX11-xcb1</package>
+      <package>libX11-data</package>
+      <package>libX11-6</package>
+      <package>libWPEBackend-fdo-1_0-1</package>
+      <package>libSvtAv1Enc0</package>
+      <package>libSoundTouch1</package>
+      <package>libSM6</package>
+      <package>libSDL_gfx15</package>
+      <package>libSDL2-2_0-0</package>
+      <package>libSDL-1_2-0</package>
+      <package>libQtQuick5</package>
+      <package>libQt5XmlPatterns5</package>
+      <package>libQt5X11Extras5</package>
+      <package>libQt5Widgets5</package>
+      <package>libQt5WebChannel5-imports</package>
+      <package>libQt5WebChannel5</package>
+      <package>libQt5WaylandClient5</package>
+      <package>libQt5Test5</package>
+      <package>libQt5Svg5</package>
+      <package>libQt5Sql5-sqlite</package>
+      <package>libQt5Sql5</package>
+      <package>libQt5QuickTemplates2-5</package>
+      <package>libQt5QuickControls2-5</package>
+      <package>libQt5PrintSupport5</package>
+      <package>libQt5Positioning5</package>
+      <package>libQt5Network5</package>
+      <package>libQt5Gui5</package>
+      <package>libQt5DBus5</package>
+      <package>libQt5Core5</package>
+      <package>libMagickWand-7_Q16HDRI10</package>
+      <package>libMagickCore-7_Q16HDRI10</package>
+      <package>libLLVM12</package>
+      <package>libImlib2-1</package>
+      <package>libICE6</package>
+      <package>libGLU1</package>
+      <package>libFLAC8</package>
+      <package>less</package>
+      <package>lensfun-data</package>
+      <package>krb5</package>
+      <package>kpartx</package>
+      <package>kmod-bash-completion</package>
+      <package>kmod</package>
+      <package>klogd</package>
+      <package>keyutils</package>
+      <package>kexec-tools</package>
+      <package>kernel-firmware-usb-network</package>
+      <package>kernel-firmware-ueagle</package>
+      <package>kernel-firmware-ti</package>
+      <package>kernel-firmware-sound</package>
+      <package>kernel-firmware-serial</package>
+      <package>kernel-firmware-realtek</package>
+      <package>kernel-firmware-radeon</package>
+      <package>kernel-firmware-qlogic</package>
+      <package>kernel-firmware-qcom</package>
+      <package>kernel-firmware-prestera</package>
+      <package>kernel-firmware-platform</package>
+      <package>kernel-firmware-nvidia</package>
+      <package>kernel-firmware-nfp</package>
+      <package>kernel-firmware-network</package>
+      <package>kernel-firmware-mwifiex</package>
+      <package>kernel-firmware-mellanox</package>
+      <package>kernel-firmware-mediatek</package>
+      <package>kernel-firmware-media</package>
+      <package>kernel-firmware-marvell</package>
+      <package>kernel-firmware-liquidio</package>
+      <package>kernel-firmware-iwlwifi</package>
+      <package>kernel-firmware-intel</package>
+      <package>kernel-firmware-i915</package>
+      <package>kernel-firmware-dpaa2</package>
+      <package>kernel-firmware-chelsio</package>
+      <package>kernel-firmware-brcm</package>
+      <package>kernel-firmware-bnx2</package>
+      <package>kernel-firmware-bluetooth</package>
+      <package>kernel-firmware-atheros</package>
+      <package>kernel-firmware-ath11k</package>
+      <package>kernel-firmware-ath10k</package>
+      <package>kernel-firmware-amdgpu</package>
+      <package>kernel-firmware-all</package>
+      <package>kbd-legacy</package>
+      <package>kbd</package>
+      <package>json-glib-lang</package>
+      <package>joe</package>
+      <package>javapackages-tools</package>
+      <package>javapackages-filesystem</package>
+      <package>java-11-openjdk-headless</package>
+      <package>java-11-openjdk-devel</package>
+      <package>java-11-openjdk</package>
+      <package>iw</package>
+      <package>issue-generator</package>
+      <package>iso_ent</package>
+      <package>iso-codes-lang</package>
+      <package>iso-codes</package>
+      <package>irqbalance-ui</package>
+      <package>irqbalance</package>
+      <package>iputils</package>
+      <package>iptables</package>
+      <package>ipset</package>
+      <package>iproute2</package>
+      <package>inxi</package>
+      <package>intlfonts-euro-bitmap-fonts</package>
+      <package>intel-vaapi-driver</package>
+      <package>initviocons</package>
+      <package>info-std</package>
+      <package>info</package>
+      <package>imlib2-loaders</package>
+      <package>imagewriter</package>
+      <package>iio-sensor-proxy</package>
+      <package>icewm-lang</package>
+      <package>icewm-default</package>
+      <package>icewm-config-upstream</package>
+      <package>icewm</package>
+      <package>iceauth</package>
+      <package>iagno-lang</package>
+      <package>iagno</package>
+      <package>i3blocks</package>
+      <package>i3</package>
+      <package>hwinfo</package>
+      <package>hwdata</package>
+      <package>htop</package>
+      <package>hostname</package>
+      <package>hicolor-icon-theme-branding-openSUSE</package>
+      <package>hicolor-icon-theme</package>
+      <package>hexchat</package>
+      <package>hdparm</package>
+      <package>haveged</package>
+      <package>gzip</package>
+      <package>gxditview</package>
+      <package>gweather-data</package>
+      <package>gvfs-lang</package>
+      <package>gvfs-fuse</package>
+      <package>gvfs-backends</package>
+      <package>gvfs-backend-samba</package>
+      <package>gvfs-backend-afc</package>
+      <package>gvfs</package>
+      <package>gupnp-av</package>
+      <package>gtkspell-lang</package>
+      <package>gtksourceview4-lang</package>
+      <package>gtk4-schema</package>
+      <package>gtk4-lang</package>
+      <package>gtk4-branding-openSUSE</package>
+      <package>gtk3-tools</package>
+      <package>gtk3-schema</package>
+      <package>gtk3-metatheme-adwaita</package>
+      <package>gtk3-lang</package>
+      <package>gtk3-immodule-vietnamese</package>
+      <package>gtk3-immodule-tigrigna</package>
+      <package>gtk3-immodule-thai</package>
+      <package>gtk3-immodule-inuktitut</package>
+      <package>gtk3-immodule-amharic</package>
+      <package>gtk3-data</package>
+      <package>gtk3-branding-openSUSE</package>
+      <package>gtk2-tools</package>
+      <package>gtk2-theming-engine-adwaita</package>
+      <package>gtk2-metatheme-adwaita</package>
+      <package>gtk2-lang</package>
+      <package>gtk2-immodule-vietnamese</package>
+      <package>gtk2-immodule-tigrigna</package>
+      <package>gtk2-immodule-thai</package>
+      <package>gtk2-immodule-inuktitut</package>
+      <package>gtk2-immodule-amharic</package>
+      <package>gtk2-engine-hcengine</package>
+      <package>gtk2-data</package>
+      <package>gtk2-branding-openSUSE</package>
+      <package>gtk-vnc-lang</package>
+      <package>gtk-chtheme</package>
+      <package>gstreamer-utils</package>
+      <package>gstreamer-plugins-ugly-orig-addon</package>
+      <package>gstreamer-plugins-ugly-lang</package>
+      <package>gstreamer-plugins-ugly</package>
+      <package>gstreamer-plugins-libav</package>
+      <package>gstreamer-plugins-good-lang</package>
+      <package>gstreamer-plugins-good-gtk</package>
+      <package>gstreamer-plugins-good-extra</package>
+      <package>gstreamer-plugins-good</package>
+      <package>gstreamer-plugins-farstream</package>
+      <package>gstreamer-plugins-base-lang</package>
+      <package>gstreamer-plugins-base</package>
+      <package>gstreamer-plugins-bad-orig-addon</package>
+      <package>gstreamer-plugins-bad-lang</package>
+      <package>gstreamer-plugins-bad</package>
+      <package>gstreamer-plugin-pipewire</package>
+      <package>gstreamer-plugin-cluttergst3</package>
+      <package>gstreamer-libnice</package>
+      <package>gstreamer-lang</package>
+      <package>gstreamer</package>
+      <package>gspell-lang</package>
+      <package>gsf-office-thumbnailer</package>
+      <package>gsettings-desktop-schemas-lang</package>
+      <package>gsettings-desktop-schemas</package>
+      <package>gsettings-backend-dconf</package>
+      <package>grub2-systemd-sleep-plugin</package>
+      <package>grub2-i386-pc</package>
+      <package>grub2-branding-openSUSE</package>
+      <package>grub2</package>
+      <package>groff-full</package>
+      <package>groff</package>
+      <package>grilo-plugins-lang</package>
+      <package>grilo-plugins</package>
+      <package>grilo-plugin-youtube</package>
+      <package>grilo-plugin-tracker</package>
+      <package>grilo-lang</package>
+      <package>grep-lang</package>
+      <package>grep</package>
+      <package>graphviz-plugins-core</package>
+      <package>graphviz-gnome</package>
+      <package>graphviz-gd</package>
+      <package>graphviz</package>
+      <package>gptfdisk</package>
+      <package>gpm</package>
+      <package>gpgme</package>
+      <package>gpg2-lang</package>
+      <package>gpg2</package>
+      <package>gparted</package>
+      <package>gpart</package>
+      <package>google-tinos-fonts</package>
+      <package>google-roboto-fonts</package>
+      <package>google-poppins-fonts</package>
+      <package>google-opensans-fonts</package>
+      <package>google-noto-fonts-doc</package>
+      <package>google-droid-fonts</package>
+      <package>google-croscore-fonts</package>
+      <package>google-cousine-fonts</package>
+      <package>google-chrome-stable</package>
+      <package>google-carlito-fonts</package>
+      <package>google-arimo-fonts</package>
+      <package>gobject-introspection</package>
+      <package>gnuchess</package>
+      <package>gnu-free-fonts</package>
+      <package>gnomekbd-tools</package>
+      <package>gnome-weather-lang</package>
+      <package>gnome-weather</package>
+      <package>gnome-video-effects</package>
+      <package>gnome-version</package>
+      <package>gnome-user-share-lang</package>
+      <package>gnome-user-share</package>
+      <package>gnome-user-docs</package>
+      <package>gnome-tweaks-lang</package>
+      <package>gnome-tweaks</package>
+      <package>gnome-themes-accessibility-gtk2</package>
+      <package>gnome-themes-accessibility</package>
+      <package>gnome-terminal-lang</package>
+      <package>gnome-terminal</package>
+      <package>gnome-system-monitor-lang</package>
+      <package>gnome-system-monitor</package>
+      <package>gnome-sudoku-lang</package>
+      <package>gnome-sudoku</package>
+      <package>gnome-subtitles</package>
+      <package>gnome-software-lang</package>
+      <package>gnome-software</package>
+      <package>gnome-shell-search-provider-seahorse</package>
+      <package>gnome-shell-search-provider-nautilus</package>
+      <package>gnome-shell-search-provider-gnome-weather</package>
+      <package>gnome-shell-search-provider-gnome-terminal</package>
+      <package>gnome-shell-search-provider-gnome-photos</package>
+      <package>gnome-shell-search-provider-gnome-clocks</package>
+      <package>gnome-shell-search-provider-gnome-characters</package>
+      <package>gnome-shell-search-provider-gnome-calculator</package>
+      <package>gnome-shell-search-provider-documents</package>
+      <package>gnome-shell-search-provider-contacts</package>
+      <package>gnome-shell-search-provider-bijiben</package>
+      <package>gnome-shell-lang</package>
+      <package>gnome-shell-extension-desktop-icons</package>
+      <package>gnome-shell-classic</package>
+      <package>gnome-shell-calendar</package>
+      <package>gnome-shell</package>
+      <package>gnome-settings-daemon-lang</package>
+      <package>gnome-settings-daemon</package>
+      <package>gnome-session-wayland</package>
+      <package>gnome-session-lang</package>
+      <package>gnome-session-default-session</package>
+      <package>gnome-session-core</package>
+      <package>gnome-session</package>
+      <package>gnome-screenshot-lang</package>
+      <package>gnome-screenshot</package>
+      <package>gnome-remote-desktop</package>
+      <package>gnome-power-manager-lang</package>
+      <package>gnome-power-manager</package>
+      <package>gnome-photos-lang</package>
+      <package>gnome-photos</package>
+      <package>gnome-packagekit-lang</package>
+      <package>gnome-packagekit</package>
+      <package>gnome-online-miners</package>
+      <package>gnome-online-accounts-lang</package>
+      <package>gnome-online-accounts</package>
+      <package>gnome-music-lang</package>
+      <package>gnome-music</package>
+      <package>gnome-mines-lang</package>
+      <package>gnome-mines</package>
+      <package>gnome-menus-lang</package>
+      <package>gnome-menus-branding-openSUSE</package>
+      <package>gnome-menus</package>
+      <package>gnome-maps-lang</package>
+      <package>gnome-maps</package>
+      <package>gnome-mahjongg-lang</package>
+      <package>gnome-mahjongg</package>
+      <package>gnome-logs-lang</package>
+      <package>gnome-logs</package>
+      <package>gnome-keyring-pam</package>
+      <package>gnome-keyring-lang</package>
+      <package>gnome-keyring</package>
+      <package>gnome-gmail-notifier</package>
+      <package>gnome-extensions</package>
+      <package>gnome-documents-lang</package>
+      <package>gnome-documents</package>
+      <package>gnome-disk-utility-lang</package>
+      <package>gnome-disk-utility</package>
+      <package>gnome-dictionary-lang</package>
+      <package>gnome-dictionary</package>
+      <package>gnome-desktop-lang</package>
+      <package>gnome-control-center-user-faces</package>
+      <package>gnome-control-center-lang</package>
+      <package>gnome-control-center-goa</package>
+      <package>gnome-control-center-color</package>
+      <package>gnome-control-center</package>
+      <package>gnome-contacts-lang</package>
+      <package>gnome-contacts</package>
+      <package>gnome-connections</package>
+      <package>gnome-common</package>
+      <package>gnome-color-manager-lang</package>
+      <package>gnome-color-manager</package>
+      <package>gnome-clocks-lang</package>
+      <package>gnome-clocks</package>
+      <package>gnome-chess-lang</package>
+      <package>gnome-chess</package>
+      <package>gnome-characters-lang</package>
+      <package>gnome-characters</package>
+      <package>gnome-calculator-lang</package>
+      <package>gnome-calculator</package>
+      <package>gnome-bluetooth-lang</package>
+      <package>gnome-bluetooth</package>
+      <package>glibc-locale-base</package>
+      <package>glibc-locale</package>
+      <package>glibc-lang</package>
+      <package>glibc-extra</package>
+      <package>glibc</package>
+      <package>glib2-tools</package>
+      <package>glib2-lang</package>
+      <package>glib-networking-lang</package>
+      <package>glib-networking</package>
+      <package>gjs</package>
+      <package>git</package>
+      <package>girepository-1_0</package>
+      <package>gio-branding-openSUSE</package>
+      <package>gimp-save-for-web</package>
+      <package>gimp-plugins-python</package>
+      <package>gimp-lang</package>
+      <package>gimp-help-el</package>
+      <package>gimp-help</package>
+      <package>gimp</package>
+      <package>ghostscript-x11</package>
+      <package>ghostscript-fonts-std-converted</package>
+      <package>ghostscript-fonts-std</package>
+      <package>ghostscript-fonts-other</package>
+      <package>ghostscript</package>
+      <package>gettext-runtime</package>
+      <package>geocode-glib</package>
+      <package>geoclue2</package>
+      <package>gegl-0_4-lang</package>
+      <package>gegl-0_4</package>
+      <package>gedit-lang</package>
+      <package>gedit</package>
+      <package>gdmflexiserver</package>
+      <package>gdm-lang</package>
+      <package>gdm-branding-openSUSE</package>
+      <package>gdm</package>
+      <package>gdk-pixbuf-thumbnailer</package>
+      <package>gdk-pixbuf-query-loaders</package>
+      <package>gdk-pixbuf-loader-rsvg</package>
+      <package>gdk-pixbuf-lang</package>
+      <package>gcr-viewer</package>
+      <package>gcr-ssh-askpass</package>
+      <package>gcr-prompter</package>
+      <package>gcr-lang</package>
+      <package>gcr-data</package>
+      <package>gcc</package>
+      <package>gcab-lang</package>
+      <package>gcab</package>
+      <package>gawk</package>
+      <package>gamin-server</package>
+      <package>fwupd</package>
+      <package>fuse3</package>
+      <package>fuse-exfat</package>
+      <package>fuse</package>
+      <package>fribidi</package>
+      <package>fonts-config</package>
+      <package>fontconfig</package>
+      <package>folks-lang</package>
+      <package>folks-data</package>
+      <package>flute</package>
+      <package>flatpak</package>
+      <package>flash-player</package>
+      <package>firewalld-lang</package>
+      <package>firewalld-bash-completion</package>
+      <package>firewalld</package>
+      <package>findutils-lang</package>
+      <package>findutils</package>
+      <package>fillup</package>
+      <package>filezilla</package>
+      <package>filesystem</package>
+      <package>file-roller-lang</package>
+      <package>file-roller</package>
+      <package>file-magic</package>
+      <package>file</package>
+      <package>feh</package>
+      <package>fdupes</package>
+      <package>farstream-data</package>
+      <package>expat</package>
+      <package>exfat-utils</package>
+      <package>evolution-lang</package>
+      <package>evolution-ews-lang</package>
+      <package>evolution-ews</package>
+      <package>evolution-data-server-lang</package>
+      <package>evolution-data-server</package>
+      <package>evolution</package>
+      <package>evince-plugin-pdfdocument</package>
+      <package>evince-lang</package>
+      <package>evince</package>
+      <package>ethtool</package>
+      <package>epiphany</package>
+      <package>eog-lang</package>
+      <package>eog</package>
+      <package>enchant-data</package>
+      <package>enchant-2-backend-hunspell</package>
+      <package>enchant-1-backends</package>
+      <package>elfutils</package>
+      <package>efont-unicode-bitmap-fonts</package>
+      <package>ebtables</package>
+      <package>e2fsprogs</package>
+      <package>dvd+rw-tools</package>
+      <package>dracut-mkinitrd-deprecated</package>
+      <package>dracut</package>
+      <package>dosfstools</package>
+      <package>dos2unix</package>
+      <package>docker</package>
+      <package>docbook_4</package>
+      <package>dnsmasq</package>
+      <package>dmraid</package>
+      <package>dmidecode</package>
+      <package>dleyna-server</package>
+      <package>dleyna-renderer</package>
+      <package>dleyna-connector-dbus</package>
+      <package>distribution-logos-openSUSE-icons</package>
+      <package>distribution-logos-openSUSE-Tumbleweed</package>
+      <package>dirmngr</package>
+      <package>diffutils-lang</package>
+      <package>diffutils</package>
+      <package>dialog-lang</package>
+      <package>dialog</package>
+      <package>dia</package>
+      <package>dhcp-client</package>
+      <package>dhcp</package>
+      <package>dh-autoreconf</package>
+      <package>device-mapper</package>
+      <package>desktop-translations</package>
+      <package>desktop-file-utils</package>
+      <package>desktop-data-openSUSE</package>
+      <package>deltarpm</package>
+      <package>dejavu-fonts</package>
+      <package>dconf-editor-lang</package>
+      <package>dconf-editor</package>
+      <package>dconf</package>
+      <package>dbus-1-x11</package>
+      <package>dbus-1-glib-tool</package>
+      <package>dbus-1-glib</package>
+      <package>dbus-1</package>
+      <package>cyrus-sasl-plain</package>
+      <package>cyrus-sasl-digestmd5</package>
+      <package>cyrus-sasl</package>
+      <package>curl</package>
+      <package>cups-pk-helper</package>
+      <package>cups-filters</package>
+      <package>cups-config</package>
+      <package>cups-client</package>
+      <package>cups</package>
+      <package>cryptsetup</package>
+      <package>crypto-policies-scripts</package>
+      <package>crypto-policies</package>
+      <package>cronie</package>
+      <package>cron</package>
+      <package>crda</package>
+      <package>cracklib-dict-full</package>
+      <package>cracklib</package>
+      <package>cpupower</package>
+      <package>cpp11</package>
+      <package>cpp</package>
+      <package>cpio-mt</package>
+      <package>cpio</package>
+      <package>coreutils-lang</package>
+      <package>coreutils-doc</package>
+      <package>coreutils</package>
+      <package>compat-usrmerge-tools</package>
+      <package>colord-lang</package>
+      <package>colord-color-profiles</package>
+      <package>colord</package>
+      <package>cogl-lang</package>
+      <package>code</package>
+      <package>cmake</package>
+      <package>cm-unicode-fonts</package>
+      <package>clutter-lang</package>
+      <package>cifs-utils</package>
+      <package>chrony-pool-openSUSE</package>
+      <package>chrony</package>
+      <package>chrome-gnome-shell</package>
+      <package>chkstat</package>
+      <package>cheese-lang</package>
+      <package>cheese</package>
+      <package>checkmedia</package>
+      <package>cdrecord</package>
+      <package>cdrdao</package>
+      <package>cdda2wav</package>
+      <package>cantarell-fonts</package>
+      <package>canberra-gtk-play</package>
+      <package>cabextract</package>
+      <package>ca-certificates-mozilla</package>
+      <package>ca-certificates</package>
+      <package>bzip2</package>
+      <package>byzanz</package>
+      <package>busybox-static</package>
+      <package>bubblewrap</package>
+      <package>brltty-driver-xwindow</package>
+      <package>brltty-driver-speech-dispatcher</package>
+      <package>brltty-driver-brlapi</package>
+      <package>brltty-driver-at-spi2</package>
+      <package>brltty</package>
+      <package>brasero-nautilus</package>
+      <package>brasero-lang</package>
+      <package>brasero</package>
+      <package>branding-openSUSE</package>
+      <package>boost-license1_76_0</package>
+      <package>bolt</package>
+      <package>bluez</package>
+      <package>blog</package>
+      <package>bind-utils</package>
+      <package>bijiben-lang</package>
+      <package>bijiben</package>
+      <package>bash-lang</package>
+      <package>bash-doc</package>
+      <package>bash-completion</package>
+      <package>bash</package>
+      <package>baobab-lang</package>
+      <package>baobab</package>
+      <package>avahi-lang</package>
+      <package>avahi</package>
+      <package>autoyast2-installation</package>
+      <package>autoyast2</package>
+      <package>autofs</package>
+      <package>augeas-lenses</package>
+      <package>augeas</package>
+      <package>audit</package>
+      <package>audacity</package>
+      <package>attr</package>
+      <package>atk-lang</package>
+      <package>at-spi2-core-lang</package>
+      <package>at-spi2-core</package>
+      <package>at-spi2-atk-gtk2</package>
+      <package>at-spi2-atk-common</package>
+      <package>aspell-el</package>
+      <package>aria2</package>
+      <package>argyllcms</package>
+      <package>arandr</package>
+      <package>appstream-glib</package>
+      <package>apparmor-utils</package>
+      <package>apparmor-profiles</package>
+      <package>apparmor-parser-lang</package>
+      <package>apparmor-parser</package>
+      <package>apparmor-docs</package>
+      <package>apparmor-abstractions</package>
+      <package>apache-commons-logging</package>
+      <package>amtk-5-lang</package>
+      <package>alsa-utils</package>
+      <package>alsa-ucm-conf</package>
+      <package>alsa-plugins-upmix</package>
+      <package>alsa-plugins-speexrate</package>
+      <package>alsa-plugins-pulse</package>
+      <package>alsa-plugins</package>
+      <package>alsa-oss</package>
+      <package>alsa</package>
+      <package>adwaita-qt5</package>
+      <package>adwaita-icon-theme</package>
+      <package>adobe-sourceserifpro-fonts</package>
+      <package>adobe-sourcesanspro-fonts</package>
+      <package>adobe-sourcecodepro-fonts</package>
+      <package>adjtimex</package>
+      <package>acpica</package>
+      <package>acl</package>
+      <package>accountsservice-lang</package>
+      <package>accountsservice</package>
+      <package>aaa_base-extras</package>
+      <package>aaa_base</package>
+      <package>QGnomePlatform</package>
+      <package>PackageKit-lang</package>
+      <package>PackageKit-gtk3-module</package>
+      <package>PackageKit-gstreamer-plugin</package>
+      <package>PackageKit-branding-openSUSE</package>
+      <package>PackageKit-backend-zypp</package>
+      <package>PackageKit</package>
+      <package>NetworkManager-vpnc-lang</package>
+      <package>NetworkManager-vpnc-gnome</package>
+      <package>NetworkManager-vpnc</package>
+      <package>NetworkManager-pptp-lang</package>
+      <package>NetworkManager-pptp-gnome</package>
+      <package>NetworkManager-pptp</package>
+      <package>NetworkManager-openvpn-lang</package>
+      <package>NetworkManager-openvpn-gnome</package>
+      <package>NetworkManager-openvpn</package>
+      <package>NetworkManager-openconnect-lang</package>
+      <package>NetworkManager-openconnect-gnome</package>
+      <package>NetworkManager-openconnect</package>
+      <package>NetworkManager-lang</package>
+      <package>NetworkManager-branding-openSUSE</package>
+      <package>NetworkManager-applet</package>
+      <package>NetworkManager</package>
+      <package>MozillaFirefox-translations-common</package>
+      <package>MozillaFirefox-branding-openSUSE</package>
+      <package>MozillaFirefox</package>
+      <package>ModemManager-bash-completion</package>
+      <package>ModemManager</package>
+      <package>Mesa-libva</package>
+      <package>Mesa-libglapi0</package>
+      <package>Mesa-libGL1</package>
+      <package>Mesa-libEGL1</package>
+      <package>Mesa-gallium</package>
+      <package>Mesa-dri</package>
+      <package>Mesa-demo-x</package>
+      <package>Mesa</package>
+      <package>ImageMagick-config-7-SUSE</package>
+      <package>ImageMagick</package>
+      <package>AppStream</package>
+    </packages>
+    <patterns t="list">
+      <pattern>apparmor</pattern>
+      <pattern>base</pattern>
+      <pattern>basesystem</pattern>
+      <pattern>documentation</pattern>
+      <pattern>enhanced_base</pattern>
+      <pattern>fonts</pattern>
+      <pattern>fonts_opt</pattern>
+      <pattern>games</pattern>
+      <pattern>gnome</pattern>
+      <pattern>gnome_basic</pattern>
+      <pattern>gnome_basis</pattern>
+      <pattern>gnome_basis_opt</pattern>
+      <pattern>gnome_games</pattern>
+      <pattern>gnome_imaging</pattern>
+      <pattern>gnome_internet</pattern>
+      <pattern>gnome_multimedia</pattern>
+      <pattern>gnome_office</pattern>
+      <pattern>gnome_utilities</pattern>
+      <pattern>gnome_x11</pattern>
+      <pattern>gnome_yast</pattern>
+      <pattern>imaging</pattern>
+      <pattern>laptop</pattern>
+      <pattern>minimal_base</pattern>
+      <pattern>multimedia</pattern>
+      <pattern>office</pattern>
+      <pattern>sw_management</pattern>
+      <pattern>sw_management_gnome</pattern>
+      <pattern>x11</pattern>
+      <pattern>x11_enhanced</pattern>
+      <pattern>x11_yast</pattern>
+      <pattern>yast2_basis</pattern>
+      <pattern>yast2_desktop</pattern>
+    </patterns>
+    <products t="list">
+      <product>openSUSE</product>
+    </products>
+  </software>
+  <ssh_import t="map">
+    <copy_config t="boolean">false</copy_config>
+    <import t="boolean">false</import>
+  </ssh_import>
+  <user_defaults t="map">
+    <expire/>
+    <group>100</group>
+    <groups/>
+    <home>/home</home>
+    <inactive>-1</inactive>
+    <no_groups t="boolean">true</no_groups>
+    <shell>/bin/bash</shell>
+    <skel>/etc/skel</skel>
+    <umask>022</umask>
+  </user_defaults>
+  <users t="list">
+    <user t="map">
+      <authorized_keys t="list"/>
+      <encrypted t="boolean">true</encrypted>
+      <fullname>iefstathios</fullname>
+      <gid>100</gid>
+      <home>/home/yolo</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max>99999</max>
+        <min>0</min>
+        <warn>7</warn>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>1000</uid>
+      <user_password>$6$tcnH5MaF6/K23Huq$JvMsD8EDeYxsj0mVRZvD6Jx4tsEMA51NeaU0vJQrvIFUlBQgMAjsbjb/Pu/N/oeRhZQgc.4RfN0Z2/30M78Zw.</user_password>
+      <username>yolo</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>user for VNC</fullname>
+      <gid>460</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>455</uid>
+      <user_password>!</user_password>
+      <username>vnc</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Daemon</fullname>
+      <gid>2</gid>
+      <home>/sbin</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>2</uid>
+      <user_password>!*</user_password>
+      <username>daemon</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Postfix Daemon</fullname>
+      <gid>51</gid>
+      <home>/var/spool/postfix</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>51</uid>
+      <user_password>!*</user_password>
+      <username>postfix</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Flatpak system helper</fullname>
+      <gid>469</gid>
+      <home>/</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>469</uid>
+      <user_password>!*</user_password>
+      <username>flatpak</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>user for colord</fullname>
+      <gid>464</gid>
+      <home>/var/lib/colord</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>458</uid>
+      <user_password>!</user_password>
+      <username>colord</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Manual pages viewer</fullname>
+      <gid>62</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>13</uid>
+      <user_password>!*</user_password>
+      <username>man</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Mailer daemon</fullname>
+      <gid>472</gid>
+      <home>/var/spool/clientmqueue</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>472</uid>
+      <user_password>!*</user_password>
+      <username>mail</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for nscd</fullname>
+      <gid>465</gid>
+      <home>/run/nscd</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>465</uid>
+      <user_password>!</user_password>
+      <username>nscd</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for polkitd</fullname>
+      <gid>479</gid>
+      <home>/var/lib/polkit</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>479</uid>
+      <user_password>!*</user_password>
+      <username>polkitd</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>NetworkManager user for OpenVPN</fullname>
+      <gid>457</gid>
+      <home>/var/lib/openvpn</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>457</uid>
+      <user_password>!*</user_password>
+      <username>nm-openvpn</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>dnsmasq</fullname>
+      <gid>65533</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>464</uid>
+      <user_password>!*</user_password>
+      <username>dnsmasq</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>NetworkManager user for OpenConnect</fullname>
+      <gid>456</gid>
+      <home>/var/lib/nm-openconnect</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>456</uid>
+      <user_password>!*</user_password>
+      <username>nm-openconnect</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Printing daemon</fullname>
+      <gid>485</gid>
+      <home>/var/spool/lpd</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>485</uid>
+      <user_password>!*</user_password>
+      <username>lp</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>bin</fullname>
+      <gid>1</gid>
+      <home>/bin</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>1</uid>
+      <user_password>!*</user_password>
+      <username>bin</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>docker --userns-remap=default</fullname>
+      <gid>452</gid>
+      <home>/home/dockremap</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>452</uid>
+      <user_password>!</user_password>
+      <username>dockremap</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>systemd Time Synchronization</fullname>
+      <gid>494</gid>
+      <home>/</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>494</uid>
+      <user_password>!*</user_password>
+      <username>systemd-timesync</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>SSH daemon</fullname>
+      <gid>461</gid>
+      <home>/var/lib/sshd</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>461</uid>
+      <user_password>!*</user_password>
+      <username>sshd</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Gnome Display Manager daemon</fullname>
+      <gid>454</gid>
+      <home>/var/lib/gdm</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>454</uid>
+      <user_password>!*</user_password>
+      <username>gdm</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>nobody</fullname>
+      <gid>65534</gid>
+      <home>/var/lib/nobody</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>65534</uid>
+      <user_password>!*</user_password>
+      <username>nobody</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>usbmuxd daemon</fullname>
+      <gid>65533</gid>
+      <home>/var/lib/usbmuxd</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>460</uid>
+      <user_password>!</user_password>
+      <username>usbmux</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>TSS daemon</fullname>
+      <gid>98</gid>
+      <home>/var/lib/tpm</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>98</uid>
+      <user_password>!*</user_password>
+      <username>tss</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for Avahi</fullname>
+      <gid>499</gid>
+      <home>/run/avahi-daemon</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>499</uid>
+      <user_password>!</user_password>
+      <username>avahi</username>
+    </user>
+    <user t="map">
+      <authorized_keys t="list"/>
+      <encrypted t="boolean">true</encrypted>
+      <fullname>root</fullname>
+      <gid>0</gid>
+      <home>/root</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/bash</shell>
+      <uid>0</uid>
+      <user_password>$6$oKftfFwDIhPI/bqU$rGXhaQYPD0AXopyODHi5eTC1Uapzvow4ZIjfKHzJkNOao2zaQPvwmn0JQahOjbcSMwE5VIZO6thvyrIEnmPab.</user_password>
+      <username>root</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>TFTP Account</fullname>
+      <gid>474</gid>
+      <home>/srv/tftpboot</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>474</uid>
+      <user_password>!*</user_password>
+      <username>tftp</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>user account for the brltty daemon</fullname>
+      <gid>100</gid>
+      <home>/var/lib/brltty</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>476</uid>
+      <user_password>!</user_password>
+      <username>brltty</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>systemd Network Management</fullname>
+      <gid>496</gid>
+      <home>/</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>496</uid>
+      <user_password>!*</user_password>
+      <username>systemd-network</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>systemd Core Dumper</fullname>
+      <gid>493</gid>
+      <home>/</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>493</uid>
+      <user_password>!*</user_password>
+      <username>systemd-coredump</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for wsdd</fullname>
+      <gid>475</gid>
+      <home>/run/wsdd</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>475</uid>
+      <user_password>!*</user_password>
+      <username>wsdd</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>RealtimeKit</fullname>
+      <gid>478</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/bin/false</shell>
+      <uid>478</uid>
+      <user_password>!</user_password>
+      <username>rtkit</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Smart Card Reader</fullname>
+      <gid>476</gid>
+      <home>/run/pcscd</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>477</uid>
+      <user_password>!</user_password>
+      <username>scard</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>systemd Resolver</fullname>
+      <gid>495</gid>
+      <home>/</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>495</uid>
+      <user_password>!*</user_password>
+      <username>systemd-resolve</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for D-Bus</fullname>
+      <gid>480</gid>
+      <home>/run/dbus</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>480</uid>
+      <user_password>!*</user_password>
+      <username>messagebus</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>NFS statd daemon</fullname>
+      <gid>463</gid>
+      <home>/var/lib/nfs</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>463</uid>
+      <user_password>!*</user_password>
+      <username>statd</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>user for Apache Subversion svnserve</fullname>
+      <gid>458</gid>
+      <home>/srv/svn</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/sbin/nologin</shell>
+      <uid>453</uid>
+      <user_password>!</user_password>
+      <username>svn</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>Chrony Daemon</fullname>
+      <gid>462</gid>
+      <home>/var/lib/chrony</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>462</uid>
+      <user_password>!*</user_password>
+      <username>chrony</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for GeoClue D-Bus service</fullname>
+      <gid>473</gid>
+      <home>/var/lib/srvGeoClue</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>473</uid>
+      <user_password>!*</user_password>
+      <username>srvGeoClue</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>User for rpcbind</fullname>
+      <gid>466</gid>
+      <home>/var/lib/empty</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>466</uid>
+      <user_password>!*</user_password>
+      <username>rpc</username>
+    </user>
+    <user t="map">
+      <encrypted t="boolean">true</encrypted>
+      <fullname>PulseAudio daemon</fullname>
+      <gid>459</gid>
+      <home>/var/lib/pulseaudio</home>
+      <home_btrfs_subvolume t="boolean">false</home_btrfs_subvolume>
+      <password_settings t="map">
+        <expire/>
+        <flag/>
+        <inact/>
+        <max/>
+        <min/>
+        <warn/>
+      </password_settings>
+      <shell>/usr/sbin/nologin</shell>
+      <uid>459</uid>
+      <user_password>!*</user_password>
+      <username>pulse</username>
+    </user>
+  </users>
+</profile>
