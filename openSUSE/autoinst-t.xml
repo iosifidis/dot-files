@@ -779,7 +779,7 @@
           <partition_nr t="integer">1</partition_nr>
           <partition_type>primary</partition_type>
           <resize t="boolean">false</resize>
-          <size>41943000064</size>
+          <size>30G</size>
         </partition>
         <partition t="map">
           <create t="boolean">true</create>
@@ -791,7 +791,7 @@
           <partition_nr t="integer">2</partition_nr>
           <partition_type>primary</partition_type>
           <resize t="boolean">false</resize>
-          <size>8388608000</size>
+          <size>10G</size>
         </partition>
         <partition t="map">
           <create t="boolean">true</create>
@@ -3432,7 +3432,8 @@ DefaultPolicy default
       </password_settings>
       <shell>/bin/bash</shell>
       <uid>1000</uid>
-      <user_password>$6$tcnH5MaF6/K23Huq$JvMsD8EDeYxsj0mVRZvD6Jx4tsEMA51NeaU0vJQrvIFUlBQgMAjsbjb/Pu/N/oeRhZQgc.4RfN0Z2/30M78Zw.</user_password>
+         <!-- suserocks -->
+         <user_password>$1$gaVLOqww$G/Vtjd6hezs7J/jH1XaOW0</user_password>
       <username>yolo</username>
     </user>
     <user t="map">
@@ -3869,8 +3870,8 @@ DefaultPolicy default
         <warn/>
       </password_settings>
       <shell>/bin/bash</shell>
-      <uid>0</uid>
-      <user_password>$6$oKftfFwDIhPI/bqU$rGXhaQYPD0AXopyODHi5eTC1Uapzvow4ZIjfKHzJkNOao2zaQPvwmn0JQahOjbcSMwE5VIZO6thvyrIEnmPab.</user_password>
+         <!-- suserocks -->
+         <user_password>$1$gaVLOqww$G/Vtjd6hezs7J/jH1XaOW0</user_password>
       <username>root</username>
     </user>
     <user t="map">
