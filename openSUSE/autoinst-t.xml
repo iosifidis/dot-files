@@ -791,7 +791,7 @@
           <partition_nr t="integer">2</partition_nr>
           <partition_type>primary</partition_type>
           <resize t="boolean">false</resize>
-          <size>10G</size>
+          <size>8G</size>
         </partition>
         <partition t="map">
           <create t="boolean">true</create>
@@ -804,7 +804,7 @@
           <partition_nr t="integer">3</partition_nr>
           <partition_type>primary</partition_type>
           <resize t="boolean">false</resize>
-          <size>69701427200</size>
+          <size>auto</size>
         </partition>
       </partitions>
       <type t="symbol">CT_DISK</type>
