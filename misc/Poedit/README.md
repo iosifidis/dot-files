@@ -6,7 +6,7 @@
 * Open poedit.  
 * Properties>Translation memory>Import tmx file
 
-## poedit-2022-02-12
+## poedit folder
 
-Unzip the folder to:  
+Poedit folder with memory:  
 ./local/share/poedit
