@@ -1,5 +1,5 @@
-# Sample .bashrc for SuSE Linux
-# Copyright (c) SuSE GmbH Nuernberg
+# Sample .bashrc for SUSE Linux
+# Copyright (c) SUSE Software Solutions Germany GmbH
 
 # There are 3 different types of shells in bash: the login shell, normal shell
 # and interactive shell. Login shells read ~/.profile and interactive shells
@@ -10,31 +10,35 @@
 # here, since multilingual X sessions would not work properly if LANG is over-
 # ridden in every subshell.
 
-# Some applications read the EDITOR variable to determine your favourite text
-# editor. So uncomment the line below and enter the editor of your choice :-)
-#export EDITOR=/usr/bin/vim
-#export EDITOR=/usr/bin/mcedit
-
-# For some news readers it makes sense to specify the NEWSSERVER variable here
-#export NEWSSERVER=your.news.server
-
-# If you want to use a Palm device with Linux, uncomment the two lines below.
-# For some (older) Palm Pilots, you might need to set a lower baud rate
-# e.g. 57600 or 38400; lowest is 9600 (very slow!)
-#
-#export PILOTPORT=/dev/pilot
-#export PILOTRATE=115200
-
 test -s ~/.alias && . ~/.alias || true
 
 #zypper aliases
-alias trim="trimroot && trimhome"
-alias update="sudo zypper up && sudo zypper clean && sudo zypper purge-kernels && sudo rm /tmp/* -rf && sudo journalctl --vacuum-time=1d"
+# UPDATE
+alias update="sudo zypper dup && sudo zypper clean && sudo zypper purge-kernels && sudo rm /tmp/* -rf && sudo journalctl --vacuum-time=1d && flatup && flatclear && flatclean"
 alias upgrade="sudo zypper dup" 
-alias search="sudo zypper se"
-alias install="sudo zypper in" 
+alias flatup="sudo flatpak update"
+alias flatclean="sudo flatpak uninstall --unused"
+alias flatclear="sudo rm -rf /var/tmp/flatpak-cache*"
+alias pipup="pip install --upgrade pip"
+alias upbash=". ~/.bashrc"
+alias orphaned="sudo zypper pa --orphaned"
+alias clean="sudo zypper cc"
+alias verify="sudo zypper verify"
+alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
+
+#TRIM
+alias trim="trimroot && trimhome"
 alias trimroot="sudo /usr/sbin/fstrim -v /"
 alias trimhome="sudo /usr/sbin/fstrim -v /home"
+
+#PROTON
+alias protonc="sudo protonvpn connect"
+alias protons="sudo protonvpn c -f"
+alias protonst="sudo protonvpn disconnect"
+
+#MISC
+alias search="sudo zypper se"
+alias install="sudo zypper in" 
 alias team="sudo systemctl start teamviewerd"
 alias mega="megacopy --local megatools --remote /Root/Uploads"
 alias ar="sudo zypper ar -f -n"
@@ -42,21 +46,20 @@ alias net="nmap -sP 192.168.1.1/24"
 alias shutdown="sudo shutdown -h now"
 alias youtube="youtube-dl --extract-audio --audio-format mp3 --username eiosifidis"
 alias istoriko="cat /var/log/zypp/history"
-alias upbash=". ~/.bashrc"
 alias myip="ip -br -c a"
 alias my-ip="curl ipinfo.io/ip"
-alias verify="sudo zypper verify"
-alias orphaned="sudo zypper pa --orphaned"
-alias flatup="sudo flatpak update"
-alias clean="sudo zypper cc"
-alias protonc="sudo protonvpn connect"
-alias protons="sudo protonvpn c -f"
-alias protonst="sudo protonvpn disconnect"
 alias server="python -m SimpleHTTPServer 8000"
-alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
+alias doker="sudo systemctl start docker"
+alias metefrase="trans -t el "
+alias enose="pdfunite *.pdf out.pdf"
+alias png2pdf="convert *.png out.pdf"
 alias opensuse="wget http://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-GNOME-Live-x86_64-Current.iso"
 alias covid="curl snf-878293.vm.okeanos.grnet.gr"
 alias weather="curl http://wttr.in/Thessaloniki"
 alias kairos="curl http://wttr.in/Athens"
 alias disk="ncdu"
 alias py="python2"
+
+#SAGEMATH
+alias sagemathstart="sudo docker run -p8888:8888 sagemath/sagemath:latest sage-jupyter"
+alias sagemathstop="sudo docker ps | grep sagemath | awk '{print $1}' | xargs docker stop"
