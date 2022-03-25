@@ -44,7 +44,9 @@ alias mega="megacopy --local megatools --remote /Root/Uploads"
 alias ar="sudo zypper ar -f -n"
 alias net="nmap -sP 192.168.1.1/24"
 alias shutdown="sudo shutdown -h now"
-alias youtube="youtube-dl --extract-audio --audio-format mp3 --username eiosifidis"
+alias youtube="youtube-dl --extract-audio --audio-format mp3"
+alias playlist="youtube-dl -cit https://www.youtube.com/playlist?list="
+alias youtubefile="youtube-dl -f best -a "
 alias istoriko="cat /var/log/zypp/history"
 alias myip="ip -br -c a"
 alias my-ip="curl ipinfo.io/ip"
@@ -63,3 +65,7 @@ alias py="python2"
 #SAGEMATH
 alias sagemathstart="sudo docker run -p8888:8888 sagemath/sagemath:latest sage-jupyter"
 alias sagemathstop="sudo docker ps | grep sagemath | awk '{print $1}' | xargs docker stop"
+
+#PAMAK
+alias infowin="rdesktop -u Administrator 83.212.100.129"
+alias infolin="ssh root@83.212.100.231"
