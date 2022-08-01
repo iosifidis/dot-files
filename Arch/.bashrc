@@ -703,7 +703,7 @@ alias trimhome="sudo fstrim -v /home"
 # Misc networking-server
 alias repo="sudo reflector --verbose -l 200 -p http --sort rate --save /etc/pacman.d/mirrorlist"
 alias doker="sudo systemctl start docker"
-alias server="python -m SimpleHTTPServer 8000"
+alias server="python -m http.server 8000"
 alias net="nmap -sP 192.168.1.1/24"
 alias wifi="sudo modprobe brcmsmac"
 
