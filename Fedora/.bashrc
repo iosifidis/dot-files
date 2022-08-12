@@ -69,12 +69,18 @@ alias server="python -m http.server 8000"
 alias doker="sudo systemctl start docker"
 alias xamppctl="sudo /opt/lampp/manager-linux-x64.run"
 
+# Network
+alias net="nmap -sP 192.168.1.1/24"
+alias myip="ip -br -c a"
+alias my-ip="curl ipinfo.io/ip"
+
 # Usefull scripts
 alias metefrase="trans -t el "
 alias enose="pdfunite *.pdf out.pdf"
 alias png2pdf="convert *.png out.pdf"
-alias net="nmap -sP 192.168.1.1/24"
 alias infoi="inxi -b"
+alias disk="ncdu"
+alias shutdown="sudo shutdown -h now"
 
 # 3rd party
 alias team="sudo systemctl start teamviewerd"
