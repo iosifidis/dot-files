@@ -80,6 +80,7 @@ alias enose="pdfunite *.pdf out.pdf"
 alias png2pdf="convert *.png out.pdf"
 alias infoi="inxi -b"
 alias disk="ncdu"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 alias shutdown="sudo shutdown -h now"
 
 # 3rd party
