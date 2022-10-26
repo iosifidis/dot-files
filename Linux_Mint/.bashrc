@@ -125,23 +125,73 @@ if [ -x /usr/bin/mint-fortune ]; then
 fi
 
 #alias
-alias up="update && upgrade"
+
+#Update
+alias up="sudo apt update && sudo apt upgrade -Vy && sudo apt autoremove -y && sudo apt autoclean && sudo apt clean && flatup && flatclear && flatclean"
 alias update="sudo apt update"
 alias upgrade="sudo apt upgrade -y"
+alias flatup="sudo flatpak update"
+alias flatclean="sudo flatpak uninstall --unused"
+alias flatclear="sudo rm -rf /var/tmp/flatpak-cache*"
 alias search="sudo apt-cache search"
-alias install="sudo apt-get install"
-alias mega="megasync --local megatools --remote /Root/Uploads"
-alias shutdown="sudo shutdown -h now"
-alias net="nmap -sP 192.168.1.1/24"
-alias youtube="youtube-dl --extract-audio --audio-format mp3 --username eiosifidis"
-alias weather="wget -qO - wttr.in/Thessaloniki"
-alias kairos="curl http://wttr.in/Athens"
-alias bat="acpi"
+alias install="sudo apt install"
 alias upbash=". ~/.bashrc"
-alias team="sudo systemctl start teamviewerd"
-alias trim="sudo fstrim --all -v"
+alias pipup="pip install --upgrade pip"
+
+# Memory - Disk - Power
+alias bat="acpi"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
 #alias trimauto="sudo systemctl enable fstrim.timer && sudo systemctl start fstrim.timer"
+alias trim="sudo fstrim --all -v"
+alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
+
+# Youtube
+alias youtube="youtube-dl --extract-audio --audio-format mp3"
+alias playlist="youtube-dl -cit https://www.youtube.com/playlist?list="
+alias youtubefile="youtube-dl -f best -a "
+
+# Weather
+alias weather="curl http://wttr.in/Thessaloniki"
+alias kairos="curl http://wttr.in/Athens"
+alias covid="curl snf-878293.vm.okeanos.grnet.gr"
+
+# Protonvpn
+alias protonc="sudo protonvpn connect"
+alias protons="sudo protonvpn c -f"
+alias protonst="sudo protonvpn disconnect"
+
+# Servers
+alias server="python -m http.server 8000"
+alias doker="sudo systemctl start docker"
+alias xamppctl="sudo /opt/lampp/manager-linux-x64.run"
+
+# Network
+alias net="nmap -sP 192.168.1.1/24"
+alias myip="ip -br -c a"
+alias my-ip="curl ipinfo.io/ip"
+
+# Usefull scripts
+alias metefrase="trans -t el "
+alias enose="pdfunite *.pdf out.pdf"
+alias png2pdf="convert *.png out.pdf"
+alias infoi="inxi -b"
+alias disk="ncdu"
+alias bat="acpi"
+alias battery="upower -i /org/freedesktop/UPower/devices/battery_BAT0"
+alias shutdown="sudo shutdown -h now"
+
+# 3rd party
+alias team="sudo systemctl start teamviewerd"
+alias mega="megasync --local megatools --remote /Root/Uploads"
+alias xamppctl="sudo /opt/lampp/manager-linux-x64.run"
 alias operaup="wget -qO - https://deb.opera.com/archive.key | sudo apt-key add -"
+#SAGEMATH
+alias sagemathstart="sudo docker run -p8888:8888 sagemath/sagemath:latest sage-jupyter"
+alias sagemathstop="sudo docker ps | grep sagemath | awk '{print $1}' | xargs docker stop"
+
+# Download openSUSE
+alias opensuse="wget http://download.opensuse.org/tumbleweed/iso/openSUSE-Tumbleweed-GNOME-Live-x86_64-Current.iso "
+
 
 # print the git branch name if in a git project
 parse_git_branch() {
