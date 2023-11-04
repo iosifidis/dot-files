@@ -30,7 +30,9 @@ unset rc
 #alias
 
 # Update
+#alias update="sudo dnf update -y && flatup && flatclean && flatclear"
 alias update="sudo dnf update -y && flatup && flatclean && flatclear"
+alias up="sudo dnf check-update -y && sudo dnf update -y && sudo dnf upgrade -y"
 alias flatup="sudo flatpak update"
 alias flatclean="sudo flatpak uninstall --unused"
 alias flatclear="sudo rm -rf /var/tmp/flatpak-cache*"
@@ -50,10 +52,10 @@ alias trim="sudo fstrim --all -v"
 alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
 
 # Youtube
-alias youtube="youtube-dl --extract-audio --audio-format mp3"
-alias playlist="youtube-dl -cit https://www.youtube.com/playlist?list="
-alias youtubefile="youtube-dl -f best -a "
-
+alias youtubemp3="yt-dlp --extract-audio --audio-format mp3"
+alias playlist="yt-dlp -cit https://www.youtube.com/playlist?list="
+alias youtubefile="yt-dlp -f best -a "
+alias youtube="yt-dlp "
 # Weather
 alias weather="curl http://wttr.in/Thessaloniki"
 alias kairos="curl http://wttr.in/Athens"
@@ -67,7 +69,8 @@ alias protonst="sudo protonvpn disconnect"
 # Servers
 alias server="python -m http.server 8000"
 alias doker="sudo systemctl start docker"
-alias xamppctl="sudo /opt/lampp/manager-linux-x64.run"
+alias xamppstart="sudo /opt/lampp/lampp start"
+alias xamppstop="sudo /opt/lampp/lampp stop"
 
 # Network
 alias net="nmap -sP 192.168.1.1/24"

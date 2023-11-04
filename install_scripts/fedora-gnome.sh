@@ -20,7 +20,7 @@ sudo dnf install -y gstreamer1-plugins-{bad-\*,good-\*,base} gstreamer1-plugin-o
 
 echo "Install programs"
 
-sudo dnf install -y poedit meld mc gparted git youtube-dl smplayer gnome-calendar gnome-connections gnome-tweaks gcc aria2 htop libgtop2 filezilla audacity testdisk powertop nano vlc menulibre aspell-el ntfs-3g dia pdfarranger pdftk make cmake traceroute nmap translate-shell remmina rdesktop p7zip java-latest-openjdk.x86_64 gnome-shell-extension-dash-to-dock simplescreenrecorder python3-tkinter gimp-save-for-web openjpeg2 lm_sensors nodejs npm docker docker-compose ncdu gnome-extensions-app java-11-openjdk
+sudo dnf install -y poedit meld mc gparted git youtube-dl smplayer gnome-calendar gnome-connections gnome-tweaks gcc aria2 htop libgtop2 filezilla audacity testdisk powertop nano vlc menulibre aspell-el ntfs-3g dia pdfarranger pdftk make cmake traceroute nmap translate-shell remmina rdesktop p7zip java-latest-openjdk.x86_64 gnome-shell-extension-dash-to-dock simplescreenrecorder python3-tkinter gimp-save-for-web openjpeg2 lm_sensors nodejs npm docker docker-compose ncdu gnome-extensions-app java-11-openjdk zerotier-one
 
 sudo dnf config-manager --set-enabled google-chrome
 sudo dnf install -y google-chrome-stable
