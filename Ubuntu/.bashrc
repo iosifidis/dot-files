@@ -119,7 +119,8 @@ fi
 #alias
 
 #Update
-alias up="sudo apt update && sudo apt upgrade -Vy && sudo apt autoremove -y && sudo apt autoclean && sudo apt clean && flatup && flatclear && flatclean"
+alias up="sudo apt update && sudo apt upgrade -Vy && sudo apt autoremove -y && sudo apt autoclean && sudo apt clean && snapup && flatup && flatclear && flatclean"
+alias snapup="snap warnings"
 alias update="sudo apt update"
 alias upgrade="sudo apt upgrade -y"
 alias flatup="sudo flatpak update"
@@ -138,9 +139,10 @@ alias trim="sudo fstrim --all -v"
 alias libre="free -h && sudo sysctl -w vm.drop_caches=3 && sudo sync && echo 3 | sudo tee /proc/sys/vm/drop_caches && free -h"
 
 # Youtube
-alias youtube="youtube-dl --extract-audio --audio-format mp3"
-alias playlist="youtube-dl -cit https://www.youtube.com/playlist?list="
-alias youtubefile="youtube-dl -f best -a "
+alias youtube="yt-dlp"
+alias youtubemp3="yt-dlp --extract-audio --audio-format mp3"
+alias playlist="yt-dlp -cit https://www.youtube.com/playlist?list="
+alias youtubefile="yt-dlp -f best -a "
 
 # Weather
 alias weather="curl http://wttr.in/Thessaloniki"
